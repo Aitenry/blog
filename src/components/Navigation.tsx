@@ -64,7 +64,7 @@ const Navigation: React.FC<NavProps> = ({
                             href="https://www.aitenry.cn"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`${isDarkMode ? 'hover:text-gray-300' : 'hover:text-gray-600'} font-medium hidden md:block`}
+                            className={`${isDarkMode ? 'hover:text-gray-300' : 'hover:text-gray-600'} font-medium block`}
                         >
                             <RiVerifiedBadgeFill size={24}/>
                         </motion.a>
@@ -73,7 +73,7 @@ const Navigation: React.FC<NavProps> = ({
                             href="https://github.com/Aitenry"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`${isDarkMode ? 'hover:text-gray-300' : 'hover:text-gray-600'} font-medium hidden md:block`}
+                            className={`${isDarkMode ? 'hover:text-gray-300' : 'hover:text-gray-600'} font-medium block`}
                         >
                             <RiGithubFill size={24}/>
                         </motion.a>
@@ -82,7 +82,7 @@ const Navigation: React.FC<NavProps> = ({
                             href="https://gitee.com/Aitenry"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`${isDarkMode ? 'hover:text-gray-300' : 'hover:text-gray-600'} font-medium hidden md:block`}
+                            className={`${isDarkMode ? 'hover:text-gray-300' : 'hover:text-gray-600'} font-medium block`}
                         >
                             <RiGiteeFill size={24}/>
                         </motion.a>
