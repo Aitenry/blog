@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import {RiGiteeFill, RiGithubFill, RiSearchLine} from "@remixicon/react";
+import {RiArrowUpWideLine, RiArrowDownWideLine, RiGiteeFill, RiGithubFill, RiSearchLine} from "@remixicon/react";
 import type { NavProps } from '../types/app';
 import React, { useState, useEffect } from "react";
 import { articles } from '../data/articles';
@@ -9,6 +9,7 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
     const sections = ['home', 'articles'];
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
     const filteredArticles = articles.filter(article => 
         article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -183,36 +184,39 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                     </motion.div>
 
                     {activeSection && (
-                        <div className="hidden md:flex space-x-8">
-                            {sections.map((section) => (
-                                <motion.a
-                                    key={section}
-                                    href={`#${section}`}
-                                    onClick={(e) => handleNavClick(e, section)}
-                                    className={`capitalize font-medium relative py-2 ${
-                                        activeSection === section
-                                            ? isDarkMode
-                                                ? 'text-white font-semibold'
-                                                : 'text-blue-600 font-semibold'
-                                            : isDarkMode
-                                                ? 'text-gray-400 hover:text-white'
-                                                : 'text-gray-600 hover:text-blue-500'
-                                    }`}
-                                >
-                                    {section}
-                                    {activeSection === section && (
-                                        <motion.div
-                                            className={`absolute bottom-0 left-0 right-0 h-0.5 ${
-                                                isDarkMode ? 'bg-white' : 'bg-blue-600'
-                                            }`}
-                                            layoutId="nav-indicator"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                        />
-                                    )}
-                                </motion.a>
-                            ))}
-                        </div>
+                        <>
+                            {/* 桌面端导航 */}
+                            <div className="hidden md:flex space-x-8">
+                                {sections.map((section) => (
+                                    <motion.a
+                                        key={section}
+                                        href={`#${section}`}
+                                        onClick={(e) => handleNavClick(e, section)}
+                                        className={`capitalize font-medium relative py-2 ${
+                                            activeSection === section
+                                                ? isDarkMode
+                                                    ? 'text-white font-semibold'
+                                                    : 'text-blue-600 font-semibold'
+                                                : isDarkMode
+                                                    ? 'text-gray-400 hover:text-white'
+                                                    : 'text-gray-600 hover:text-blue-500'
+                                        }`}
+                                    >
+                                        {section}
+                                        {activeSection === section && (
+                                            <motion.div
+                                                className={`absolute bottom-0 left-0 right-0 h-0.5 ${
+                                                    isDarkMode ? 'bg-white' : 'bg-blue-600'
+                                                }`}
+                                                layoutId="nav-indicator"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                            />
+                                        )}
+                                    </motion.a>
+                                ))}
+                            </div>
+                        </>
                     )}
 
                     <div className="flex items-center gap-1">
@@ -249,6 +253,69 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                     </div>
                 </div>
             </nav>
+
+            {/* 移动端展开按钮 - 在 nav 下方 */}
+            {!isMobileMenuOpen && activeSection && (
+                <div className="fixed top-12 left-0 right-0 z-30 flex justify-center md:hidden">
+                    <button
+                        className={`p-2 rounded-full transition-all hover:scale-110 ${
+                            isDarkMode 
+                                ? 'text-gray-400 hover:text-white' 
+                                : 'text-gray-500 hover:text-gray-900'
+                        }`}
+                        onClick={() => setIsMobileMenuOpen(true)}
+                    >
+                        <RiArrowDownWideLine className="w-6 h-6" size={24} />
+                    </button>
+                </div>
+            )}
+
+            {/* 移动端导航菜单 */}
+            {isMobileMenuOpen && activeSection && (
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className={`fixed top-16 left-0 right-0 z-30 md:hidden ${isDarkMode ? 'bg-gray-900' : 'bg-white'} shadow-lg rounded-b-2xl py-4 px-6 border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-100'}`}
+                >
+                    <div className="flex flex-col space-y-4">
+                        {sections.map((section) => (
+                            <motion.a
+                                key={section}
+                                href={`#${section}`}
+                                onClick={(e) => {
+                                    handleNavClick(e, section);
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className={`capitalize font-medium py-2 ${
+                                    activeSection === section
+                                        ? isDarkMode
+                                            ? 'text-white font-semibold'
+                                            : 'text-blue-600 font-semibold'
+                                        : isDarkMode
+                                            ? 'text-gray-400 hover:text-white'
+                                            : 'text-gray-600 hover:text-blue-500'
+                                }`}
+                            >
+                                {section}
+                            </motion.a>
+                        ))}
+                        {/* 收起按钮 */}
+                        <div className="flex justify-center pt-2">
+                            <button
+                                className={`p-2 rounded-full transition-all hover:scale-110 ${
+                                    isDarkMode 
+                                        ? 'hover:bg-gray-800 text-gray-400 hover:text-white' 
+                                        : 'hover:bg-gray-100 text-gray-500 hover:text-gray-900'
+                                }`}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                                <RiArrowUpWideLine className="w-6 h-6" size={24} />
+                            </button>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
 
             {isSearchOpen && searchOverlay}
         </>

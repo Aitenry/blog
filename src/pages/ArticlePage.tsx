@@ -198,7 +198,14 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
                                                 <CopyButton text={codeText} />
                                             </div>
                                         );
-                                    }
+                                    },
+                                    table: ({ children, ...props }) => (
+                                        <div className="overflow-x-auto my-4">
+                                            <table {...props} className="min-w-full">
+                                                {children}
+                                            </table>
+                                        </div>
+                                    )
                                 }}
                             >
                                 {article.content}
