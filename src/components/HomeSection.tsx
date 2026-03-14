@@ -14,7 +14,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
     return (
         <section
             id="home"
-            className="min-h-screen flex flex-col items-center justify-center pt-16 sm:pt-20 md:pt-24 px-4 sm:px-6 lg:px-8 relative"
+            className="min-h-[calc(100vh-70px)] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative"
         >
             <div className="max-w-4xl w-full mx-auto text-center flex-grow flex flex-col justify-center">
                 <motion.h1

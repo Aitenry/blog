@@ -1,18 +1,18 @@
 // App.tsx
 import { useState, useEffect } from 'react';
-import {useScroll, useSpring} from 'framer-motion';
+import { useScroll, useSpring } from 'framer-motion';
+import {HashRouter, Routes, Route, useLocation, useNavigate, Navigate} from 'react-router-dom';
 import Navigation from './components/Navigation';
-import HomeSection from './components/HomeSection';
-import AboutSection from './components/AboutSection';
-import SkillsSection from './components/SkillsSection';
-import ProjectsSection from './components/ProjectsSection';
 import ProgressBar from './components/ProgressBar';
-import SnowBackground from './components/SnowBackground'; // 新增雪花背景组件
-import type {NavProps} from './types/app.ts';
+import HomePage from './pages/HomePage';
+import ArticlePage from './pages/ArticlePage';
+import ArticlesPage from './pages/ArticlesPage';
+import type { NavProps } from './types/app.ts';
 
-const App = () => {
-    const [activeSection, setActiveSection] = useState('home');
+const AppContent = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
@@ -20,7 +20,13 @@ const App = () => {
         restDelta: 0.001
     });
 
-    // 监听系统主题变化
+    let activeSection = '';
+    if (location.pathname === '/home') {
+        activeSection = 'home';
+    } else if (location.pathname === '/articles') {
+        activeSection = 'articles';
+    }
+
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -40,29 +46,6 @@ const App = () => {
         };
     }, []);
 
-    const handleScroll = () => {
-        const sections = ['home', 'about', 'skills', 'projects'];
-        const scrollPosition = window.scrollY + window.innerHeight / 3;
-
-        for (let i = 0; i < sections.length; i++) {
-            const element = document.getElementById(sections[i]);
-            if (element) {
-                const elementTop = element.offsetTop;
-                const elementBottom = elementTop + element.clientHeight;
-
-                if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-                    setActiveSection(sections[i]);
-                    return;
-                }
-            }
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     const scrollToNextSection = () => {
         const nextSection = document.getElementById('about');
         if (nextSection) {
@@ -75,42 +58,39 @@ const App = () => {
 
     const handleNavClick: NavProps['handleNavClick'] = (e, sectionId) => {
         e.preventDefault();
-        const targetElement = document.getElementById(sectionId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop,
-                behavior: 'smooth'
-            });
+
+        if (sectionId === 'home') {
+            navigate('/home');
+        } else if (sectionId === 'articles') {
+            navigate('/articles');
         }
     };
 
     return (
         <div className={`font-sans relative min-h-screen ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-800'}`}>
-            {/* 雪花背景 */}
-            <SnowBackground isDarkMode={isDarkMode} />
-
-            {/* 所有UI元素放在同一个层级，确保正确的z-index顺序 */}
             <ProgressBar scaleX={scaleX} isDarkMode={isDarkMode} />
             <Navigation
                 activeSection={activeSection}
                 isDarkMode={isDarkMode}
                 handleNavClick={handleNavClick}
             />
-
-            {/* 内容区域 */}
-            <div className="relative z-10">
-                <HomeSection
-                    isDarkMode={isDarkMode}
-                    scrollToNextSection={scrollToNextSection}
-                />
-
-                <AboutSection isDarkMode={isDarkMode} />
-
-                <SkillsSection isDarkMode={isDarkMode} />
-
-                <ProjectsSection isDarkMode={isDarkMode} />
+            <div className="relative z-10 pt-16">
+                <Routes>
+                    <Route path="/home" element={<HomePage isDarkMode={isDarkMode} scrollToNextSection={scrollToNextSection} />} />
+                    <Route path="/articles" element={<ArticlesPage isDarkMode={isDarkMode} />} />
+                    <Route path="/article/:id" element={<ArticlePage isDarkMode={isDarkMode} />} />
+                    <Route path="*" element={<Navigate to="/home" replace />} />
+                </Routes>
             </div>
         </div>
+    );
+};
+
+const App = () => {
+    return (
+        <HashRouter>
+            <AppContent />
+        </HashRouter>
     );
 };
 
