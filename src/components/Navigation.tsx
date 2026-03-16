@@ -1,20 +1,38 @@
 import { motion } from 'framer-motion';
-import {RiArrowUpWideLine, RiArrowDownWideLine, RiGiteeFill, RiGithubFill, RiSearchLine} from "@remixicon/react";
+import {RiArrowUpWideLine, RiArrowDownWideLine, RiGiteeFill, RiGithubFill,
+    RiSearchLine, RiHome2Line, RiArticleLine, RiBook2Line, RiCloseLine, RiSearch2Line} from "@remixicon/react";
 import type { NavProps } from '../types/app';
 import React, { useState, useEffect } from "react";
 import { articles } from '../data/articles';
+import { diaries } from '../data/diaries';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+const sectionIcons: Record<string, React.ReactNode> = {
+    home: <RiHome2Line size={18} />,
+    diaries: <RiBook2Line size={18} />,
+    articles: <RiArticleLine size={18} />
+};
 
 const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavClick }) => {
-    const sections = ['home', 'articles'];
+    const { t } = useTranslation();
+    const sections = ['home', 'diaries', 'articles'];
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    
+    const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+    const navItemRefs = React.useRef<Record<string, HTMLAnchorElement | null>>({});
+
     const filteredArticles = articles.filter(article => 
         article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
         article.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+
+    const filteredDiaries = diaries.filter(diary => 
+        diary.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        diary.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        diary.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
     useEffect(() => {
@@ -28,44 +46,123 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
         };
     }, [isSearchOpen]);
 
-    const searchResultItems = filteredArticles.map((article) => (
-        <Link
-            key={article.id}
-            to={`/article/${article.id}`}
-            onClick={() => {
-                setIsSearchOpen(false);
-                setSearchQuery('');
-            }}
-            className={`block p-4 rounded-2xl transition-all hover:-translate-y-0.5 ${
-                isDarkMode ? 'hover:bg-gray-800/80' : 'hover:bg-gray-50'
-            }`}
-        >
-            <h3 className={`font-semibold text-lg mb-2 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}>
-                {article.title}
-            </h3>
-            <p className={`text-sm mb-3 line-clamp-2 ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>
-                {article.excerpt}
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-                {article.tags.map((tag) => (
-                    <span
-                        key={tag}
-                        className={`text-xs px-2.5 py-1 rounded-full font-medium ${
-                            isDarkMode 
-                                ? 'bg-gray-800 text-gray-300 border border-gray-700' 
-                                : 'bg-gray-100 text-gray-600'
-                        }`}
-                    >
-                        {tag}
-                    </span>
-                ))}
-            </div>
-        </Link>
-    ));
+    useEffect(() => {
+        const updateIndicator = () => {
+            const activeNavItem = navItemRefs.current[activeSection];
+            if (activeNavItem) {
+                setIndicatorStyle({
+                    left: activeNavItem.offsetLeft,
+                    width: activeNavItem.offsetWidth
+                });
+            }
+        };
+        
+        window.addEventListener('resize', updateIndicator);
+        updateIndicator();
+        
+        return () => {
+            window.removeEventListener('resize', updateIndicator);
+        };
+    }, [activeSection]);
+
+    const searchResultItems = (
+        <>
+            {filteredDiaries.length > 0 && (
+                <div>
+                    <h4 className={`text-sm font-semibold mb-3 uppercase tracking-wider ${
+                        isDarkMode ? 'text-gray-500' : 'text-gray-400'
+                    }`}>
+                        {t('navigation.diaries')}
+                    </h4>
+                    {filteredDiaries.map((diary) => (
+                        <Link
+                            key={`diary-${diary.id}`}
+                            to={`/diary/${diary.id}`}
+                            onClick={() => {
+                                setIsSearchOpen(false);
+                                setSearchQuery('');
+                            }}
+                            className={`block p-4 rounded-2xl transition-all hover:-translate-y-0.5 ${
+                                isDarkMode ? 'hover:bg-gray-800/80' : 'hover:bg-gray-50'
+                            }`}
+                        >
+                            <h3 className={`font-semibold text-lg mb-2 ${
+                                isDarkMode ? 'text-white' : 'text-gray-900'
+                            }`}>
+                                {diary.title}
+                            </h3>
+                            <p className={`text-sm mb-3 line-clamp-2 ${
+                                isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                            }`}>
+                                {diary.excerpt}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                                {diary.tags.map((tag) => (
+                                    <span
+                                        key={`diary-tag-${tag}`}
+                                        className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+                                            isDarkMode
+                                                ? 'bg-gray-800 text-gray-300 border border-gray-700'
+                                                : 'bg-gray-100 text-gray-600'
+                                        }`}
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            )}
+            {filteredArticles.length > 0 && (
+                <div className="mb-4">
+                    <h4 className={`text-sm font-semibold mb-3 uppercase tracking-wider ${
+                        isDarkMode ? 'text-gray-500' : 'text-gray-400'
+                    }`}>
+                        {t('navigation.articles')}
+                    </h4>
+                    {filteredArticles.map((article) => (
+                        <Link
+                            key={`article-${article.id}`}
+                            to={`/article/${article.id}`}
+                            onClick={() => {
+                                setIsSearchOpen(false);
+                                setSearchQuery('');
+                            }}
+                            className={`block p-4 rounded-2xl transition-all hover:-translate-y-0.5 ${
+                                isDarkMode ? 'hover:bg-gray-800/80' : 'hover:bg-gray-50'
+                            }`}
+                        >
+                            <h3 className={`font-semibold text-lg mb-2 ${
+                                isDarkMode ? 'text-white' : 'text-gray-900'
+                            }`}>
+                                {article.title}
+                            </h3>
+                            <p className={`text-sm mb-3 line-clamp-2 ${
+                                isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                            }`}>
+                                {article.excerpt}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5">
+                                {article.tags.map((tag) => (
+                                    <span
+                                        key={`article-tag-${tag}`}
+                                        className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+                                            isDarkMode 
+                                                ? 'bg-gray-800 text-gray-300 border border-gray-700' 
+                                                : 'bg-gray-100 text-gray-600'
+                                        }`}
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            )}
+        </>
+    );
 
     const searchContent = (
         <div className="space-y-3">
@@ -77,8 +174,8 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
         <div className={`text-center py-16 ${
             isDarkMode ? 'text-gray-500' : 'text-gray-400'
         }`}>
-            <p className="text-base font-medium mb-1">No articles found</p>
-            <p className="text-sm opacity-75">Try a different search term</p>
+            <p className="text-base font-medium mb-1">{t('navigation.noArticlesFound')}</p>
+            <p className="text-sm opacity-75">{t('navigation.tryADifferentSearchTerm')}</p>
         </div>
     );
 
@@ -86,12 +183,12 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
         <div className={`text-center py-16 ${
             isDarkMode ? 'text-gray-500' : 'text-gray-400'
         }`}>
-            <p className="text-base font-medium">Start typing to search</p>
+            <p className="text-base font-medium">{t('navigation.startTypingToSearch')}</p>
         </div>
     );
 
     const renderSearchResults = () => {
-        if (searchQuery && filteredArticles.length > 0) {
+        if (searchQuery && (filteredArticles.length > 0 || filteredDiaries.length > 0)) {
             return searchContent;
         } else if (searchQuery) {
             return noResults;
@@ -102,6 +199,22 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
 
     const searchOverlay = (
         <div className="fixed inset-0 z-50">
+            <style>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 8px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: ${isDarkMode ? '#1f2937' : '#f3f4f6'};
+                    border-radius: 4px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: ${isDarkMode ? '#4b5563' : '#d1d5db'};
+                    border-radius: 4px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: ${isDarkMode ? '#6b7280' : '#9ca3af'};
+                }
+            `}</style>
             <div 
                 className={`fixed inset-0 ${
                     isDarkMode ? 'bg-black/60' : 'bg-white/60'
@@ -120,7 +233,7 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                         <h2 className={`text-xl font-semibold tracking-tight ${
                             isDarkMode ? 'text-white' : 'text-gray-900'
                         }`}>
-                            Search
+                            {t('navigation.search')}
                         </h2>
                         <button
                             onClick={() => setIsSearchOpen(false)}
@@ -130,33 +243,29 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                                     : 'hover:bg-gray-100 text-gray-500 hover:text-gray-900'
                             }`}
                         >
-                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            </svg>
+                            <RiCloseLine size={20} />
                         </button>
                     </div>
                     
                     <div className="relative">
-                        <svg className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 ${
+                        <RiSearch2Line className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 ${
                             isDarkMode ? 'text-gray-500' : 'text-gray-400'
-                        }`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                        }`} size={20} />
                         <input
                             type="text"
-                            placeholder="Type to search..."
+                            placeholder={t('navigation.typeToSearch')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className={`w-full pl-12 pr-4 py-3.5 rounded-2xl border-0 text-base focus:outline-none focus:ring-2 focus:ring-offset-2 ${
                                 isDarkMode 
-                                    ? 'bg-gray-800/50 text-white placeholder-gray-500 focus:ring-gray-700 focus:ring-offset-gray-900' 
+                                    ? 'bg-gray-800/50 text-white placeholder-gray-500 focus:ring-gray-700 focus:ring-offset-gray-90' 
                                     : 'bg-gray-100 text-gray-900 placeholder-gray-400 focus:ring-blue-500 focus:ring-offset-white'
                             }`}
                             autoFocus
                         />
                     </div>
                     
-                    <div className="mt-8 max-h-96 overflow-y-auto">
+                    <div style={{ padding: '0 7px 0 14px' }} className="mt-8 max-h-96 overflow-y-auto custom-scrollbar">
                         {renderSearchResults()}
                     </div>
                 </div>
@@ -183,41 +292,45 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                         Aitenry
                     </motion.div>
 
-                    {activeSection && (
-                        <>
-                            {/* 桌面端导航 */}
-                            <div className="hidden md:flex space-x-8">
-                                {sections.map((section) => (
-                                    <motion.a
-                                        key={section}
-                                        href={`#${section}`}
-                                        onClick={(e) => handleNavClick(e, section)}
-                                        className={`capitalize font-medium relative py-2 ${
-                                            activeSection === section
-                                                ? isDarkMode
-                                                    ? 'text-white font-semibold'
-                                                    : 'text-blue-600 font-semibold'
-                                                : isDarkMode
-                                                    ? 'text-gray-400 hover:text-white'
-                                                    : 'text-gray-600 hover:text-blue-500'
-                                        }`}
-                                    >
-                                        {section}
-                                        {activeSection === section && (
-                                            <motion.div
-                                                className={`absolute bottom-0 left-0 right-0 h-0.5 ${
-                                                    isDarkMode ? 'bg-white' : 'bg-blue-600'
-                                                }`}
-                                                layoutId="nav-indicator"
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                            />
-                                        )}
-                                    </motion.a>
-                                ))}
-                            </div>
-                        </>
-                    )}
+                    {/* 桌面端导航 */}
+                    <div className="hidden md:flex gap-6 relative">
+                        {sections.map((section) => (
+                            <motion.a
+                                key={section}
+                                ref={(el) => {
+                                    navItemRefs.current[section] = el;
+                                }}
+                                href={`#${section}`}
+                                onClick={(e) => handleNavClick(e, section)}
+                                className={`capitalize font-medium py-2 flex items-center gap-2 ${
+                                    activeSection === section
+                                        ? isDarkMode
+                                            ? 'text-white font-semibold'
+                                            : 'text-blue-600 font-semibold'
+                                        : isDarkMode
+                                            ? 'text-gray-400 hover:text-white'
+                                            : 'text-gray-600 hover:text-blue-500'
+                                }`}
+                            >
+                                {sectionIcons[section]}
+                                {t(`navigation.${section}`)}
+                            </motion.a>
+                        ))}
+                        <motion.div
+                            className={`absolute bottom-0 h-0.5 ${
+                                isDarkMode ? 'bg-white' : 'bg-blue-600'
+                            }`}
+                            animate={{
+                                left: indicatorStyle.left,
+                                width: indicatorStyle.width
+                            }}
+                            transition={{
+                                type: 'spring',
+                                stiffness: 500,
+                                damping: 30
+                            }}
+                        />
+                    </div>
 
                     <div className="flex items-center gap-1">
                         <motion.a
@@ -248,14 +361,14 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                                 isDarkMode ? 'hover:text-gray-300' : 'hover:text-gray-600'
                             } font-medium block`}
                         >
-                            <RiSearchLine size={24}/>
+                            <RiSearchLine size={23}/>
                         </motion.button>
                     </div>
                 </div>
             </nav>
 
             {/* 移动端展开按钮 - 在 nav 下方 */}
-            {!isMobileMenuOpen && activeSection && (
+            {!isMobileMenuOpen && (
                 <div className="fixed top-12 left-0 right-0 z-30 flex justify-center md:hidden">
                     <button
                         className={`p-2 rounded-full transition-all hover:scale-110 ${
@@ -271,12 +384,12 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
             )}
 
             {/* 移动端导航菜单 */}
-            {isMobileMenuOpen && activeSection && (
+            {isMobileMenuOpen && (
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className={`fixed top-16 left-0 right-0 z-30 md:hidden ${isDarkMode ? 'bg-gray-900' : 'bg-white'} shadow-lg rounded-b-2xl py-4 px-6 border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-100'}`}
+                    className={`fixed top-15 left-0 right-0 z-30 md:hidden ${isDarkMode ? 'bg-black' : 'bg-white'} shadow-lg rounded-b-2xl py-4 px-6 border-t ${isDarkMode ? 'border-gray-800' : 'border-gray-100'}`}
                 >
                     <div className="flex flex-col space-y-4">
                         {sections.map((section) => (
@@ -287,7 +400,7 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                                     handleNavClick(e, section);
                                     setIsMobileMenuOpen(false);
                                 }}
-                                className={`capitalize font-medium py-2 ${
+                                className={`capitalize font-medium py-2 flex items-center gap-2 ${
                                     activeSection === section
                                         ? isDarkMode
                                             ? 'text-white font-semibold'
@@ -297,7 +410,8 @@ const Navigation: React.FC<NavProps> = ({ activeSection, isDarkMode, handleNavCl
                                             : 'text-gray-600 hover:text-blue-500'
                                 }`}
                             >
-                                {section}
+                                {sectionIcons[section]}
+                                {t(`navigation.${section}`)}
                             </motion.a>
                         ))}
                         {/* 收起按钮 */}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import type { SectionProps } from '../types/app';
 import React from 'react';
 import { articles as loadedArticles } from '../data/articles';
+import { RiCalendarLine, RiArrowRightLine } from '@remixicon/react';
 
 const ArticleSection: React.FC<SectionProps> = ({ isDarkMode }) => {
     return (
@@ -15,8 +16,7 @@ const ArticleSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                         <motion.div
                             key={article.id}
                             initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             whileHover={{ y: -4 }}
                         >
@@ -29,9 +29,7 @@ const ArticleSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                                 }`}
                             >
                                 <div className={`flex items-center gap-2 text-sm mb-2 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
+                                    <RiCalendarLine size={16} />
                                     <span>{article.date}</span>
                                 </div>
                                 <h3 className={`text-xl sm:text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
@@ -56,9 +54,7 @@ const ArticleSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                                 </div>
                                 <div className={`mt-4 flex items-center gap-2 text-sm ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                                     Read more
-                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
+                                    <RiArrowRightLine size={16} />
                                 </div>
                             </Link>
                         </motion.div>

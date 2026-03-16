@@ -5,12 +5,12 @@ import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import { useParams, useNavigate } from 'react-router-dom';
 import React, {type ReactElement, useState} from 'react';
-import { articles as loadedArticles } from '../data/articles';
+import { diaries as loadedDiaries } from '../data/diaries';
 import SnowBackground from '../components/SnowBackground';
-import { RiCheckLine, RiFileCopyLine, RiArrowLeftLine, RiCalendarLine, RiBookOpenLine } from '@remixicon/react';
+import { RiCheckLine, RiFileCopyLine, RiArrowLeftLine, RiCalendarLine, RiCloudyLine, RiEmotionHappyLine, RiBookOpenLine } from '@remixicon/react';
 import { useTranslation } from 'react-i18next';
 
-interface ArticlePageProps {
+interface DiaryPageProps {
     isDarkMode: boolean;
 }
 
@@ -30,7 +30,8 @@ const extractTextFromChildren = (children: React.ReactNode | string): string => 
 
     return '';
 };
-const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
+
+const DiaryPage: React.FC<DiaryPageProps> = ({ isDarkMode }) => {
     const { t } = useTranslation();
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -59,15 +60,15 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
                 title={copied ? t('common.copied') : t('common.copyCode')}
             >
                 {copied ? (
-                    <RiCheckLine className="w-4 h-4" />
+                    <RiCheckLine size={16} />
                 ) : (
-                    <RiFileCopyLine className="w-4 h-4" />
+                    <RiFileCopyLine size={16} />
                 )}
             </button>
         );
     };
 
-    const article = loadedArticles.find(a => a.id === id);
+    const diary = loadedDiaries.find(d => d.id === id);
 
     const calculateWordCount = (content: string) => {
         const textOnly = content
@@ -79,7 +80,7 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
         return chineseChars + englishWords;
     };
 
-    const wordCount = article ? calculateWordCount(article.content) : 0;
+    const wordCount = diary ? calculateWordCount(diary.content) : 0;
 
     const markdownStyles = `
         .markdown-body h1 { font-size: 2em; font-weight: 700; margin: 1em 0 0.5em; }
@@ -106,19 +107,19 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
         .markdown-body th, .markdown-body td { padding: 0.75em; border: 1px solid; text-align: left; }
     `;
 
-    if (!article) {
+    if (!diary) {
         return (
             <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
                 <SnowBackground isDarkMode={isDarkMode} />
                 <div className="relative z-10 text-center">
                     <h1 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        {t('articleNotFound.title')}
+                        {t('diaryNotFound.title')}
                     </h1>
                     <button
-                        onClick={() => navigate('/articles')}
+                        onClick={() => navigate('/diaries')}
                         className={`px-6 py-2 rounded-lg ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
                     >
-                        {t('common.backToArticles')}
+                        {t('common.backToDiaries')}
                     </button>
                 </div>
             </div>
@@ -135,29 +136,41 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
                     animate={{ opacity: 1, y: 0 }}
                 >
                     <button
-                        onClick={() => navigate('/articles')}
+                        onClick={() => navigate('/diaries')}
                         className={`mb-8 flex items-center gap-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'} transition-colors`}
                     >
-                        <RiArrowLeftLine className="w-5 h-5" />
-                        {t('common.backToArticles')}
+                        <RiArrowLeftLine size={20} />
+                        {t('common.backToDiaries')}
                     </button>
                     <div className={`p-6 sm:p-8 rounded-xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
                         <div className="mb-6">
                             <h1 className={`text-2xl sm:text-3xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                                {article.title}
+                                {diary.title}
                             </h1>
                             <div className="flex flex-wrap items-center gap-4 text-sm">
                                 <div className={`flex items-center gap-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                    <RiCalendarLine className="w-4 h-4" />
-                                    <span>{t('common.publishedOn')} {article.date}</span>
+                                    <RiCalendarLine size={16} />
+                                    <span>{t('common.publishedOn')} {diary.date}</span>
                                 </div>
+                                {diary.weather && (
+                                    <div className={`flex items-center gap-1.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                        <RiCloudyLine size={16} />
+                                        <span>{diary.weather}</span>
+                                    </div>
+                                )}
+                                {diary.mood && (
+                                    <div className={`flex items-center gap-1.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                        <RiEmotionHappyLine size={16} />
+                                        <span>{diary.mood}</span>
+                                    </div>
+                                )}
                                 <div className={`flex items-center gap-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                    <RiBookOpenLine className="w-4 h-4" />
+                                    <RiBookOpenLine size={16} />
                                     <span>{wordCount.toLocaleString()} {t('common.words')}</span>
                                 </div>
                             </div>
                             <div className="mt-3 flex flex-wrap gap-2">
-                                {article.tags.map((tag) => (
+                                {diary.tags.map((tag) => (
                                     <span
                                         key={tag}
                                         className={`text-xs px-3 py-1 rounded-full ${
@@ -212,7 +225,7 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
                                     )
                                 }}
                             >
-                                {article.content}
+                                {diary.content}
                             </ReactMarkdown>
                         </div>
                     </div>
@@ -222,4 +235,4 @@ const ArticlePage: React.FC<ArticlePageProps> = ({ isDarkMode }) => {
     );
 };
 
-export default ArticlePage;
+export default DiaryPage;

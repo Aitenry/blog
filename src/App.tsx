@@ -7,6 +7,8 @@ import ProgressBar from './components/ProgressBar';
 import HomePage from './pages/HomePage';
 import ArticlePage from './pages/ArticlePage';
 import ArticlesPage from './pages/ArticlesPage';
+import DiariesPage from './pages/DiariesPage';
+import DiaryPage from './pages/DiaryPage';
 import type { NavProps } from './types/app.ts';
 
 const AppContent = () => {
@@ -23,9 +25,19 @@ const AppContent = () => {
     let activeSection = '';
     if (location.pathname === '/home') {
         activeSection = 'home';
+    } else if (location.pathname === '/diaries') {
+        activeSection = 'diaries';
+    } else if (location.pathname.startsWith('/diary/')) {
+        activeSection = 'diaries';
     } else if (location.pathname === '/articles') {
         activeSection = 'articles';
+    } else if (location.pathname.startsWith('/article/')) {
+        activeSection = 'articles';
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -61,6 +73,8 @@ const AppContent = () => {
 
         if (sectionId === 'home') {
             navigate('/home');
+        } else if (sectionId === 'diaries') {
+            navigate('/diaries');
         } else if (sectionId === 'articles') {
             navigate('/articles');
         }
@@ -79,6 +93,8 @@ const AppContent = () => {
                     <Route path="/home" element={<HomePage isDarkMode={isDarkMode} scrollToNextSection={scrollToNextSection} />} />
                     <Route path="/articles" element={<ArticlesPage isDarkMode={isDarkMode} />} />
                     <Route path="/article/:id" element={<ArticlePage isDarkMode={isDarkMode} />} />
+                    <Route path="/diaries" element={<DiariesPage isDarkMode={isDarkMode} />} />
+                    <Route path="/diary/:id" element={<DiaryPage isDarkMode={isDarkMode} />} />
                     <Route path="*" element={<Navigate to="/home" replace />} />
                 </Routes>
             </div>

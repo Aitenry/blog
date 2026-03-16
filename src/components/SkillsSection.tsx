@@ -2,6 +2,7 @@
 import { motion, type Variants } from 'framer-motion';
 import type {SectionProps} from '../types/app.ts';
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 interface Skill {
     name: string;
@@ -9,6 +10,7 @@ interface Skill {
 }
 
 const SkillsSection: React.FC<SectionProps> = ({ isDarkMode }) => {
+    const { t } = useTranslation();
     const skills: Skill[] = [
         { name: "Java", level: 90 },
         { name: "Vue", level: 79 },
@@ -53,7 +55,7 @@ const SkillsSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                     className="text-center mb-12 sm:mb-16"
                 >
                     <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        Tech Stack
+                        {t('skills.title')}
                     </h2>
                     <div className={`w-12 sm:w-16 h-0.5 mx-auto ${isDarkMode ? 'bg-gray-700' : 'bg-blue-200'} rounded-full`} />
                 </motion.div>

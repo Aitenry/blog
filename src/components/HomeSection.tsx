@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import type {SectionProps} from '../types/app.ts';
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 interface HomeSectionProps extends SectionProps {
     scrollToNextSection: () => void;
@@ -11,6 +12,8 @@ const HomeSection: React.FC<HomeSectionProps> = ({
                                                      isDarkMode,
                                                      scrollToNextSection
                                                  }) => {
+    const { t } = useTranslation();
+    
     return (
         <section
             id="home"
@@ -25,7 +28,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
                         isDarkMode ? 'text-white' : 'text-gray-900'
                     } leading-tight`}
                 >
-                    Full-stack Developer
+                    {t('home.title')}
                 </motion.h1>
 
                 <motion.p
@@ -36,10 +39,9 @@ const HomeSection: React.FC<HomeSectionProps> = ({
                         isDarkMode ? 'text-gray-300' : 'text-gray-600'
                     } max-w-2xl lg:max-w-3xl mx-auto mb-8`}
                 >
-                    Building intelligent information systems and AI-powered tools
+                    {t('home.subtitle')}
                 </motion.p>
 
-                {/* 可选：添加副标题或描述，移动端隐藏 */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -47,7 +49,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({
                     className="hidden md:block"
                 >
                     <p className={`text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                        Creating innovative solutions at the intersection of AI and web technologies
+                        {t('home.description')}
                     </p>
                 </motion.div>
             </div>

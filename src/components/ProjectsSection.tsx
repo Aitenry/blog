@@ -2,6 +2,7 @@
 import { motion, type Variants } from 'framer-motion';
 import type {SectionProps} from '../types/app.ts';
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 interface Project {
     id: number;
@@ -13,26 +14,27 @@ interface Project {
 }
 
 const ProjectsSection: React.FC<SectionProps> = ({ isDarkMode }) => {
+    const { t } = useTranslation();
     const projects: Project[] = [
         {
             id: 1,
             title: "IIMS-By-AI",
-            description: "AI-Powered Intelligent Information Management Platform",
+            description: t('projects.iimsDescription'),
             tech: ["Java", "Vue", "SpringBoot", "TypeScript", "AI"],
             image: isDarkMode
                 ? "/iims-dark.svg"
                 : "/iims-light.svg",
-            github: "https://github.com/Aitenry/IIMS-By-AI" // 修复了链接中的多余空格
+            github: "https://github.com/Aitenry/IIMS-By-AI"
         },
         {
             id: 2,
             title: "RytenBench",
-            description: "Lightweight Personal AI Workbench",
+            description: t('projects.rytenDescription'),
             tech: ["Electron", "React", "TypeScript", "AI"],
             image: isDarkMode
                 ? "/ryten-dark.svg"
                 : "/ryten-light.svg",
-            github: "https://github.com/Aitenry/RytenBench" // 修复了链接中的多余空格
+            github: "https://github.com/Aitenry/RytenBench"
         }
     ];
 
@@ -72,7 +74,7 @@ const ProjectsSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                     className="text-center mb-12 sm:mb-16"
                 >
                     <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        Open Source Project
+                        {t('projects.title')}
                     </h2>
                     <div className={`w-12 sm:w-16 h-0.5 mx-auto ${isDarkMode ? 'bg-gray-700' : 'bg-blue-200'} rounded-full`} />
                 </motion.div>

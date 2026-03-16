@@ -2,8 +2,11 @@
 import { motion } from 'framer-motion';
 import type {SectionProps} from '../types/app.ts';
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 const AboutSection: React.FC<SectionProps> = ({ isDarkMode }) => {
+    const { t } = useTranslation();
+    
     return (
         <section
             id="about"
@@ -17,7 +20,7 @@ const AboutSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                     className="text-center mb-12 sm:mb-16"
                 >
                     <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        About Me
+                        {t('about.title')}
                     </h2>
                     <div className={`w-12 sm:w-16 h-0.5 mx-auto ${isDarkMode ? 'bg-gray-700' : 'bg-blue-200'} rounded-full`} />
                 </motion.div>
@@ -31,13 +34,13 @@ const AboutSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                         className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 sm:p-6 lg:p-8 rounded-xl border`}
                     >
                         <h3 className={`text-xl sm:text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-3 sm:mb-4`}>
-                            My Profile
+                            {t('about.profile')}
                         </h3>
                         <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base`}>
-                            I am a developer specializing in the integration of AI and Web technologies, dedicated to building intelligent systems and AI-powered applications. I actively contribute to open-source projects within the open-source community, driven by the belief that technology can create a better future.
+                            {t('about.profileDesc1')}
                         </p>
                         <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed text-sm sm:text-base`}>
-                            I am passionate about exploring technical frontiers, with a particular focus on applying AI within the information management domain. I prioritize code quality and user experience, constantly striving for simple yet efficient solutions.
+                            {t('about.profileDesc2')}
                         </p>
                     </motion.div>
 
@@ -49,26 +52,26 @@ const AboutSection: React.FC<SectionProps> = ({ isDarkMode }) => {
                         className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 sm:p-6 lg:p-8 rounded-xl border`}
                     >
                         <h3 className={`text-xl sm:text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-3 sm:mb-4`}>
-                            Interests & Philosophy
+                            {t('about.interests')}
                         </h3>
                         <ul className={`space-y-2 sm:space-y-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} text-sm sm:text-base`}>
                             <li className="flex items-start">
                                 <span className={`${isDarkMode ? 'text-white' : 'text-blue-500'} mr-2 flex-shrink-0`}>•</span>
-                                <span>Open Source Contribution: Actively maintaining multiple open-source projects related to AI and Web technologies.</span>
+                                <span>{t('about.interest1')}</span>
                             </li>
                             <li className="flex items-start">
                                 <span className={`${isDarkMode ? 'text-white' : 'text-blue-500'} mr-2 flex-shrink-0`}>•</span>
-                                <span>Technical Exploration: Continuously learning the latest trends in AI and Web development.</span>
+                                <span>{t('about.interest2')}</span>
                             </li>
                             <li className="flex items-start">
                                 <span className={`${isDarkMode ? 'text-white' : 'text-blue-500'} mr-2 flex-shrink-0`}>•</span>
-                                <span>Design Thinking: Focusing on user experience and interface details, pursuing the balance between functionality and aesthetics.</span>
+                                <span>{t('about.interest3')}</span>
                             </li>
                         </ul>
 
                         <div className={`${isDarkMode ? 'border-t border-gray-700' : 'border-t border-gray-100'} mt-4 sm:mt-6 pt-3 sm:pt-4`}>
                             <blockquote className={`italic ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} text-center text-sm sm:text-base`}>
-                                "Life is measured by thought and action not by time."
+                                "{t('about.quote')}"
                             </blockquote>
                         </div>
                     </motion.div>
