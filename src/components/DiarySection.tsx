@@ -7,7 +7,7 @@ import { RiCalendarLine, RiCloudyLine, RiEmotionHappyLine, RiArrowRightLine } fr
 
 const DiarySection: React.FC<SectionProps> = ({ isDarkMode }) => {
     return (
-        <section className={`min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24`}>
+        <section style={{ overflow: 'hidden' }} className={`min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24`}>
             <div className="max-w-4xl w-full mx-auto">
                 <div className="relative">
                     <div className={`absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-0.5 ${
