@@ -3754,256 +3754,256 @@ unittest.main()\r
 \r
 ------\r
 \r
-`,y0=[{id:"1",title:"Python 编程指南",date:"2024-03-15",excerpt:"Python 基础语法和编程技巧指南。",content:vI,tags:["Python","Programming","Beginner"]},{id:"2",title:"Git 分支命名规则",date:"2024-03-10",excerpt:"规范化的 Git 分支命名规范和最佳实践。",content:AI,tags:["Git","Version Control","Best Practices"]}],NI=`<div style="text-align: center;">
-
-## 忆思首
-
-吾坐台前思旧事，月光透雾照台前。
-
-感伤往事催泪下，哭过笑过封尘心！
-
-门前柳枝随风飘，枯叶残花润入土。
-
-事如诸多烦心志，明了知了又如何？
-
-</div>
-`,CI=`<div style="text-align: center;">
-
-## 别离
-
-亭院门前叶纷飞，落日西下人憔悴。
-
-晚霞夕阳终散去，残月寒风凝叶霜。
-
-盏灯落尽千辉絮，纸上终是戚戚言。
-
-世间百态为情生，唯我一人对愁眠。
-
-</div>
-`,wI=`Intelligent Information Management System (IIMS) - AI驱动的智能信息管理平台。
-
-这是一个综合性的多功能集成平台，旨在提供高效、智能的信息管理解决方案。
-
-## 技术栈
-
-### 前端技术栈
-
-| 技术 | 版本 | 说明 |
-|------|------|------|
-| Vue | 3.5.18 | 前端框架 |
-| Vue Router | 4.0.13 | 路由管理 |
-| Pinia | 3.0.2 | 状态管理 |
-| Vuex | 4.1.0 | 状态管理 |
-| Element Plus | 2.13.2 | UI 组件库 |
-| Vite | 7.1.11 | 构建工具 |
-| TypeScript | 5.8.0 | 类型系统 |
-| Tailwind CSS | 4.0.15 | CSS 框架 |
-| Vditor | 3.10.9 | Markdown 编辑器 |
-| ECharts | 5.6.0 | 数据可视化 |
-| Axios | 1.13.5 | HTTP 客户端 |
-
-### 后端技术栈
-
-| 技术 | 版本 | 说明 |
-|------|------|------|
-| Spring Boot | 3.5.0 | 后端框架 |
-| Java | 17 | 开发语言 |
-| MyBatis Plus | 3.5.10.1 | ORM 框架 |
-| Spring AI | 1.1.2 | AI 集成框架 |
-| Sa-Token | 1.34.0 | 权限认证框架 |
-| MySQL | 9.0.0 | 关系型数据库 |
-| PostgreSQL | 42.7.10 | 关系型数据库 |
-| Redis | 2.7.2 | 缓存数据库 |
-| MinIO | 8.5.12 | 对象存储 |
-| Knife4j | 3.0.3 | API 文档 |
-| Lombok | 1.18.20 | 代码简化工具 |
-
-## 核心功能
-
-### 1. AI 对话管理功能
-
-| 功能 | 状态 | 说明 |
-|------|------|------|
-| 对话删除 | ✅ | 已完成 |
-| 对话复制 | ✅ | 已完成 |
-| 话题置顶 | ❎️ | 待开发 |
-| 话题重命名 | ❎️ | 待开发 |
-| 分享对话 | ❎️ | 待开发 |
-| 生成历史 | ❎️ | 待开发 |
-| 对话收藏 | ✅/❎️ | 部分完成 |
-| 重新生成 | ❎️ | 待开发 |
-
-### 2. AI 智能功能
-
-| 功能 | 状态 | 说明 |
-|------|------|------|
-| 内部系统问答 | ❎️ | MCP、Tools 集成 |
-| 权限集成 | ❎️ | 用户权限验证 |
-| 对话问答 | ✅ | 基础问答功能 |
-| 知识库问答 | ✅/❎️ | 内部文档知识库 ✅，用户上传文档 ❎️ |
-| 文章问答 | ❎️ | MD 文档内容解析 |
-| 文档问答 | ✅ | 文档内容问答 |
-
-### 3. AI 模型支持
-
-| 平台 | 状态 | 说明 |
-|------|------|------|
-| Ollama | ✅ | 本地模型支持 |
-| Deepseek | ✅ | 云端模型支持 |
-| OpenAI | ✅ | vllm 支持 |
-
-## 技术特性
-
-| 特性 | 说明 |
-|------|------|
-| 权限管理 | 基于角色的访问控制，敏感信息保护 |
-| AI 集成 | 关键词提取，智能接口调用 |
-| 数据安全 | 权限验证，敏感信息过滤 |
-| 流式输出 | 支持实时响应 |
-
-## 开发状态
-
-系统正在积极开发中，部分核心功能已完成，其他模块正在持续优化和改进。
-
-[![Star History Chart](https://api.star-history.com/image?repos=Aitenry/IIMS-By-AI&amp;type=date&amp;legend=top-left)](https://www.star-history.com/?repos=Aitenry%2FIIMS-By-AI&amp;type=date&amp;legend=top-left)
-`,OI=`## 轻量级个人 AI 工作台
-
-RytenBench 是一款专为个人用户设计的轻量级 AI 工作台，集成了日常工作和学习中常用的各种功能，旨在提高个人效率和生产力。它使用 Electron、React 和 TypeScript 构建为跨平台桌面应用程序。
-
-### 技术栈
-
-| 技术                 | 说明                |
-| ------------------ | ----------------- |
-| Electron           | 桌面应用框架            |
-| electron-vite      | 新一代 Electron 构建工具 |
-| React 19           | 前端框架              |
-| TypeScript         | 开发语言              |
-| Ant Design 6       | UI 组件库            |
-| Remix Icon         | 图标库               |
-| Tailwind CSS 4     | CSS 框架            |
-| React Router DOM 7 | 路由管理              |
-| SQLite3            | 本地数据库             |
-| LangChain          | AI 框架             |
-
-### 核心特性
-
-| 特性    | 说明                            |
-| ----- | ----------------------------- |
-| 轻量级设计 | 简洁的界面设计，快速加载，低资源消耗            |
-| 多功能集成 | 一个平台集成多个常用工具                  |
-| AI 驱动 | 集成 AI 功能，提供智能辅助               |
-| 跨平台   | 原生运行在 Windows、macOS 和 Linux 上 |
-| 个性化   | 支持个性化设置和自定义                   |
-
-### 功能模块
-
-#### 首页
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 工作台概览 | 显示所有功能模块的快速入口和状态概览 |
-| 知识库预览 | 展示最近访问的知识库文档和笔记 |
-| 待办事项 | 展示今日待办任务列表 |
-
-#### 笔记
-
-##### 所有笔记
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 笔记列表 | 展示所有笔记，支持搜索和排序 |
-| 新建笔记 | 创建新的 Markdown 格式笔记 |
-| AI 辅助写作 | AI 智能辅助写作、内容生成和润色 |
-
-##### 标签管理
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 标签列表 | 查看和管理所有标签 |
-| 标签编辑 | 创建、编辑和删除标签 |
-| 笔记分类 | 通过标签对笔记进行分类管理 |
-
-#### 知识
-
-##### 知识库
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 文档管理 | 上传、下载和管理知识库文档 |
-| 文档搜索 | 全文搜索知识库内容 |
-| 分类管理 | 按分类组织知识库文档 |
-
-##### 知识图谱
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 图谱构建 | 自动构建知识节点和关系图谱 |
-| 图谱可视化 | 交互式知识图谱展示 |
-| 关联查询 | 查询知识节点之间的关联关系 |
-
-#### 计划
-
-##### 计划总览
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 日历视图 | 按日期展示日程安排 |
-| 时间规划 | 设置和管理时间块 |
-| 日程提醒 | 重要日程的提醒功能 |
-
-##### 待办事项
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 任务列表 | 展示所有待办任务 |
-| 任务创建 | 添加新的待办任务 |
-| 任务状态 | 标记任务完成/未完成 |
-
-#### 工具
-
-##### MCP 仓库
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 工具浏览 | 浏览可用的 MCP 工具 |
-| 工具配置 | 配置 MCP 工具参数 |
-| 工具调用 | 直接调用 MCP 工具 |
-
-##### API 调用
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 请求构建 | 构建 HTTP 请求 |
-| 响应查看 | 查看 API 响应数据 |
-| 历史记录 | 保存 API 调用历史 |
-
-#### 助手
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| AI 对话 | 与 AI 进行自然语言对话 |
-| 上下文记忆 | 记住对话历史和上下文 |
-| 流式输出 | 实时流式响应展示 |
-
-#### 天气
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 实时天气 | 显示当前位置的实时天气 |
-| 天气预报 | 未来几天的天气预报 |
-| 生活指数 | 穿衣、紫外线等生活指数 |
-
-#### 音乐
-
-| 功能点 | 详细说明 |
-|--------|----------|
-| 音乐播放 | 播放本地音乐文件 |
-| 音量控制 | 调节播放音量 |
-| 播放列表 | 管理音乐播放列表 |
-
-### 开发状态
-
-项目正在积极开发中，这是一个全新的个人 AI 工作台项目，旨在为用户提供一个集成了多种功能的高效工作环境。
+`,y0=[{id:"1",title:"Python 编程指南",date:"2024-03-15",excerpt:"Python 基础语法和编程技巧指南。",content:vI,tags:["Python","Programming","Beginner"]},{id:"2",title:"Git 分支命名规则",date:"2024-03-10",excerpt:"规范化的 Git 分支命名规范和最佳实践。",content:AI,tags:["Git","Version Control","Best Practices"]}],NI=`<div style="text-align: center;">\r
+\r
+## 忆思首\r
+\r
+吾坐台前思旧事，月光透雾照台前。\r
+\r
+感伤往事催泪下，哭过笑过封尘心！\r
+\r
+门前柳枝随风飘，枯叶残花润入土。\r
+\r
+事如诸多烦心志，明了知了又如何？\r
+\r
+</div>\r
+`,CI=`<div style="text-align: center;">\r
+\r
+## 别离\r
+\r
+亭院门前叶纷飞，落日西下人憔悴。\r
+\r
+晚霞夕阳终散去，残月寒风凝叶霜。\r
+\r
+盏灯落尽千辉絮，纸上终是戚戚言。\r
+\r
+世间百态为情生，唯我一人对愁眠。\r
+\r
+</div>\r
+`,wI=`Intelligent Information Management System (IIMS) - AI驱动的智能信息管理平台。\r
+\r
+这是一个综合性的多功能集成平台，旨在提供高效、智能的信息管理解决方案。\r
+\r
+## 技术栈\r
+\r
+### 前端技术栈\r
+\r
+| 技术 | 版本 | 说明 |\r
+|------|------|------|\r
+| Vue | 3.5.18 | 前端框架 |\r
+| Vue Router | 4.0.13 | 路由管理 |\r
+| Pinia | 3.0.2 | 状态管理 |\r
+| Vuex | 4.1.0 | 状态管理 |\r
+| Element Plus | 2.13.2 | UI 组件库 |\r
+| Vite | 7.1.11 | 构建工具 |\r
+| TypeScript | 5.8.0 | 类型系统 |\r
+| Tailwind CSS | 4.0.15 | CSS 框架 |\r
+| Vditor | 3.10.9 | Markdown 编辑器 |\r
+| ECharts | 5.6.0 | 数据可视化 |\r
+| Axios | 1.13.5 | HTTP 客户端 |\r
+\r
+### 后端技术栈\r
+\r
+| 技术 | 版本 | 说明 |\r
+|------|------|------|\r
+| Spring Boot | 3.5.0 | 后端框架 |\r
+| Java | 17 | 开发语言 |\r
+| MyBatis Plus | 3.5.10.1 | ORM 框架 |\r
+| Spring AI | 1.1.2 | AI 集成框架 |\r
+| Sa-Token | 1.34.0 | 权限认证框架 |\r
+| MySQL | 9.0.0 | 关系型数据库 |\r
+| PostgreSQL | 42.7.10 | 关系型数据库 |\r
+| Redis | 2.7.2 | 缓存数据库 |\r
+| MinIO | 8.5.12 | 对象存储 |\r
+| Knife4j | 3.0.3 | API 文档 |\r
+| Lombok | 1.18.20 | 代码简化工具 |\r
+\r
+## 核心功能\r
+\r
+### 1. AI 对话管理功能\r
+\r
+| 功能 | 状态 | 说明 |\r
+|------|------|------|\r
+| 对话删除 | ✅ | 已完成 |\r
+| 对话复制 | ✅ | 已完成 |\r
+| 话题置顶 | ❎️ | 待开发 |\r
+| 话题重命名 | ❎️ | 待开发 |\r
+| 分享对话 | ❎️ | 待开发 |\r
+| 生成历史 | ❎️ | 待开发 |\r
+| 对话收藏 | ✅/❎️ | 部分完成 |\r
+| 重新生成 | ❎️ | 待开发 |\r
+\r
+### 2. AI 智能功能\r
+\r
+| 功能 | 状态 | 说明 |\r
+|------|------|------|\r
+| 内部系统问答 | ❎️ | MCP、Tools 集成 |\r
+| 权限集成 | ❎️ | 用户权限验证 |\r
+| 对话问答 | ✅ | 基础问答功能 |\r
+| 知识库问答 | ✅/❎️ | 内部文档知识库 ✅，用户上传文档 ❎️ |\r
+| 文章问答 | ❎️ | MD 文档内容解析 |\r
+| 文档问答 | ✅ | 文档内容问答 |\r
+\r
+### 3. AI 模型支持\r
+\r
+| 平台 | 状态 | 说明 |\r
+|------|------|------|\r
+| Ollama | ✅ | 本地模型支持 |\r
+| Deepseek | ✅ | 云端模型支持 |\r
+| OpenAI | ✅ | vllm 支持 |\r
+\r
+## 技术特性\r
+\r
+| 特性 | 说明 |\r
+|------|------|\r
+| 权限管理 | 基于角色的访问控制，敏感信息保护 |\r
+| AI 集成 | 关键词提取，智能接口调用 |\r
+| 数据安全 | 权限验证，敏感信息过滤 |\r
+| 流式输出 | 支持实时响应 |\r
+\r
+## 开发状态\r
+\r
+系统正在积极开发中，部分核心功能已完成，其他模块正在持续优化和改进。\r
+\r
+[![Star History Chart](https://api.star-history.com/image?repos=Aitenry/IIMS-By-AI&amp;type=date&amp;legend=top-left)](https://www.star-history.com/?repos=Aitenry%2FIIMS-By-AI&amp;type=date&amp;legend=top-left)\r
+`,OI=`## 轻量级个人 AI 工作台\r
+\r
+RytenBench 是一款专为个人用户设计的轻量级 AI 工作台，集成了日常工作和学习中常用的各种功能，旨在提高个人效率和生产力。它使用 Electron、React 和 TypeScript 构建为跨平台桌面应用程序。\r
+\r
+### 技术栈\r
+\r
+| 技术                 | 说明                |\r
+| ------------------ | ----------------- |\r
+| Electron           | 桌面应用框架            |\r
+| electron-vite      | 新一代 Electron 构建工具 |\r
+| React 19           | 前端框架              |\r
+| TypeScript         | 开发语言              |\r
+| Ant Design 6       | UI 组件库            |\r
+| Remix Icon         | 图标库               |\r
+| Tailwind CSS 4     | CSS 框架            |\r
+| React Router DOM 7 | 路由管理              |\r
+| SQLite3            | 本地数据库             |\r
+| LangChain          | AI 框架             |\r
+\r
+### 核心特性\r
+\r
+| 特性    | 说明                            |\r
+| ----- | ----------------------------- |\r
+| 轻量级设计 | 简洁的界面设计，快速加载，低资源消耗            |\r
+| 多功能集成 | 一个平台集成多个常用工具                  |\r
+| AI 驱动 | 集成 AI 功能，提供智能辅助               |\r
+| 跨平台   | 原生运行在 Windows、macOS 和 Linux 上 |\r
+| 个性化   | 支持个性化设置和自定义                   |\r
+\r
+### 功能模块\r
+\r
+#### 首页\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 工作台概览 | 显示所有功能模块的快速入口和状态概览 |\r
+| 知识库预览 | 展示最近访问的知识库文档和笔记 |\r
+| 待办事项 | 展示今日待办任务列表 |\r
+\r
+#### 笔记\r
+\r
+##### 所有笔记\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 笔记列表 | 展示所有笔记，支持搜索和排序 |\r
+| 新建笔记 | 创建新的 Markdown 格式笔记 |\r
+| AI 辅助写作 | AI 智能辅助写作、内容生成和润色 |\r
+\r
+##### 标签管理\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 标签列表 | 查看和管理所有标签 |\r
+| 标签编辑 | 创建、编辑和删除标签 |\r
+| 笔记分类 | 通过标签对笔记进行分类管理 |\r
+\r
+#### 知识\r
+\r
+##### 知识库\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 文档管理 | 上传、下载和管理知识库文档 |\r
+| 文档搜索 | 全文搜索知识库内容 |\r
+| 分类管理 | 按分类组织知识库文档 |\r
+\r
+##### 知识图谱\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 图谱构建 | 自动构建知识节点和关系图谱 |\r
+| 图谱可视化 | 交互式知识图谱展示 |\r
+| 关联查询 | 查询知识节点之间的关联关系 |\r
+\r
+#### 计划\r
+\r
+##### 计划总览\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 日历视图 | 按日期展示日程安排 |\r
+| 时间规划 | 设置和管理时间块 |\r
+| 日程提醒 | 重要日程的提醒功能 |\r
+\r
+##### 待办事项\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 任务列表 | 展示所有待办任务 |\r
+| 任务创建 | 添加新的待办任务 |\r
+| 任务状态 | 标记任务完成/未完成 |\r
+\r
+#### 工具\r
+\r
+##### MCP 仓库\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 工具浏览 | 浏览可用的 MCP 工具 |\r
+| 工具配置 | 配置 MCP 工具参数 |\r
+| 工具调用 | 直接调用 MCP 工具 |\r
+\r
+##### API 调用\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 请求构建 | 构建 HTTP 请求 |\r
+| 响应查看 | 查看 API 响应数据 |\r
+| 历史记录 | 保存 API 调用历史 |\r
+\r
+#### 助手\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| AI 对话 | 与 AI 进行自然语言对话 |\r
+| 上下文记忆 | 记住对话历史和上下文 |\r
+| 流式输出 | 实时流式响应展示 |\r
+\r
+#### 天气\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 实时天气 | 显示当前位置的实时天气 |\r
+| 天气预报 | 未来几天的天气预报 |\r
+| 生活指数 | 穿衣、紫外线等生活指数 |\r
+\r
+#### 音乐\r
+\r
+| 功能点 | 详细说明 |\r
+|--------|----------|\r
+| 音乐播放 | 播放本地音乐文件 |\r
+| 音量控制 | 调节播放音量 |\r
+| 播放列表 | 管理音乐播放列表 |\r
+\r
+### 开发状态\r
+\r
+项目正在积极开发中，这是一个全新的个人 AI 工作台项目，旨在为用户提供一个集成了多种功能的高效工作环境。\r
 `,E0=[{id:"1",title:"RytenBench",date:"2026-02-17",weather:"多云",mood:"思考",excerpt:"发布下一个项目的规划与定位！",content:OI,tags:["项目","AI","工具","工作区"]},{id:"2",title:"IIMS-By-AI v0.1.0",date:"2026-01-31",weather:"晴",mood:"激动",excerpt:"今天终于完成了 IIMS-By-AI 项目的第一个版本！",content:wI,tags:["项目","AI","智能系统","IIMS"]},{id:"3",title:"题记-2020.12.28.夜",date:"2020-12-28",weather:"夜",mood:"别离",excerpt:"别离 - 亭院门前叶纷飞，落日西下人憔悴。",content:CI,tags:["诗","别离","感悟"]},{id:"4",title:"题记-2020.6.12.夜",date:"2020-06-12",weather:"夜",mood:"感伤",excerpt:"忆思首 - 吾坐台前思旧事，月光透雾照台前。",content:NI,tags:["诗","感悟","生活"]}],x_={home:O.jsx(yI,{size:18}),diaries:O.jsx(pI,{size:18}),articles:O.jsx(mI,{size:18})},RI=({activeSection:e,isDarkMode:t,handleNavClick:n})=>{const{t:i}=ja(),s=["home","diaries","articles"],[l,u]=F.useState(!1),[f,h]=F.useState(""),[d,p]=F.useState(!1),[g,E]=F.useState({left:0,width:0}),_=Ke.useRef({}),x=y0.filter(L=>L.title.toLowerCase().includes(f.toLowerCase())||L.excerpt.toLowerCase().includes(f.toLowerCase())||L.tags.some(X=>X.toLowerCase().includes(f.toLowerCase()))),A=E0.filter(L=>L.title.toLowerCase().includes(f.toLowerCase())||L.excerpt.toLowerCase().includes(f.toLowerCase())||L.tags.some(X=>X.toLowerCase().includes(f.toLowerCase())));F.useEffect(()=>(l?document.body.style.overflow="hidden":document.body.style.overflow="unset",()=>{document.body.style.overflow="unset"}),[l]),F.useEffect(()=>{const L=()=>{const X=_.current[e];X&&E({left:X.offsetLeft,width:X.offsetWidth})};return window.addEventListener("resize",L),L(),()=>{window.removeEventListener("resize",L)}},[e]);const v=O.jsxs(O.Fragment,{children:[A.length>0&&O.jsxs("div",{children:[O.jsx("h4",{className:`text-sm font-semibold mb-3 uppercase tracking-wider ${t?"text-gray-500":"text-gray-400"}`,children:i("navigation.diaries")}),A.map(L=>O.jsxs(Xs,{to:`/diary/${L.id}`,onClick:()=>{u(!1),h("")},className:`block p-4 rounded-2xl transition-all hover:-translate-y-0.5 ${t?"hover:bg-gray-800/80":"hover:bg-gray-50"}`,children:[O.jsx("h3",{className:`font-semibold text-lg mb-2 ${t?"text-white":"text-gray-900"}`,children:L.title}),O.jsx("p",{className:`text-sm mb-3 line-clamp-2 ${t?"text-gray-400":"text-gray-600"}`,children:L.excerpt}),O.jsx("div",{className:"flex flex-wrap gap-1.5",children:L.tags.map(X=>O.jsx("span",{className:`text-xs px-2.5 py-1 rounded-full font-medium ${t?"bg-gray-800 text-gray-300 border border-gray-700":"bg-gray-100 text-gray-600"}`,children:X},`diary-tag-${X}`))})]},`diary-${L.id}`))]}),x.length>0&&O.jsxs("div",{className:"mb-4",children:[O.jsx("h4",{className:`text-sm font-semibold mb-3 uppercase tracking-wider ${t?"text-gray-500":"text-gray-400"}`,children:i("navigation.articles")}),x.map(L=>O.jsxs(Xs,{to:`/article/${L.id}`,onClick:()=>{u(!1),h("")},className:`block p-4 rounded-2xl transition-all hover:-translate-y-0.5 ${t?"hover:bg-gray-800/80":"hover:bg-gray-50"}`,children:[O.jsx("h3",{className:`font-semibold text-lg mb-2 ${t?"text-white":"text-gray-900"}`,children:L.title}),O.jsx("p",{className:`text-sm mb-3 line-clamp-2 ${t?"text-gray-400":"text-gray-600"}`,children:L.excerpt}),O.jsx("div",{className:"flex flex-wrap gap-1.5",children:L.tags.map(X=>O.jsx("span",{className:`text-xs px-2.5 py-1 rounded-full font-medium ${t?"bg-gray-800 text-gray-300 border border-gray-700":"bg-gray-100 text-gray-600"}`,children:X},`article-tag-${X}`))})]},`article-${L.id}`))]})]}),N=O.jsx("div",{className:"space-y-3",children:v}),D=O.jsxs("div",{className:`text-center py-16 ${t?"text-gray-500":"text-gray-400"}`,children:[O.jsx("p",{className:"text-base font-medium mb-1",children:i("navigation.noArticlesFound")}),O.jsx("p",{className:"text-sm opacity-75",children:i("navigation.tryADifferentSearchTerm")})]}),k=O.jsx("div",{className:`text-center py-16 ${t?"text-gray-500":"text-gray-400"}`,children:O.jsx("p",{className:"text-base font-medium",children:i("navigation.startTypingToSearch")})}),q=()=>f&&(x.length>0||A.length>0)?N:f?D:k,Y=O.jsxs("div",{className:"fixed inset-0 z-50",children:[O.jsx("style",{children:`
                 .custom-scrollbar::-webkit-scrollbar {
                     width: 8px;
@@ -4091,7 +4091,7 @@ https://github.com/highlightjs/highlight.js/issues/2277`),jt=pe,ht=Re),$e===void
                                 }
                                 .markdown-body blockquote { border-color: ${e?"#4b5563":"#d1d5db"}; }
                                 .markdown-body th, .markdown-body td { border-color: ${e?"#4b5563":"#d1d5db"}; }
-                            `}),O.jsx(KS,{remarkPlugins:[yA],rehypePlugins:[xv,FA],components:{pre:({children:d,...p})=>{const g=Lp(d);return O.jsxs("div",{className:"relative",children:[O.jsx("pre",{...p,children:d}),O.jsx(s,{text:g})]})},table:({children:d,...p})=>O.jsx("div",{className:"overflow-x-auto my-4",children:O.jsx("table",{...p,className:"min-w-full",children:d})})},children:l.content})]})]})]})})]}):O.jsxs("div",{className:`min-h-screen flex items-center justify-center ${e?"bg-black":"bg-white"}`,children:[O.jsx(za,{isDarkMode:e}),O.jsxs("div",{className:"relative z-10 text-center",children:[O.jsx("h1",{className:`text-2xl font-bold mb-4 ${e?"text-white":"text-gray-900"}`,children:t("articleNotFound.title")}),O.jsx("button",{onClick:()=>i("/articles"),className:`px-6 py-2 rounded-lg ${e?"bg-gray-800 text-white hover:bg-gray-700":"bg-blue-600 text-white hover:bg-blue-700"}`,children:t("common.backToArticles")})]})]})},tF=({isDarkMode:e})=>O.jsx("section",{className:"min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24",children:O.jsx("div",{className:"max-w-5xl w-full mx-auto",children:O.jsx("div",{className:"grid gap-6",children:y0.map((t,n)=>O.jsx(Tt.div,{initial:{opacity:0,y:30},animate:{opacity:1,y:0},transition:{duration:.5,delay:n*.1},whileHover:{y:-4},children:O.jsxs(Xs,{to:`/article/${t.id}`,className:`block p-6 sm:p-8 rounded-xl border cursor-pointer transition-all ${e?"bg-gray-900 border-gray-800 hover:border-gray-700":"bg-white border-gray-200 hover:border-gray-300"}`,children:[O.jsxs("div",{className:`flex items-center gap-2 text-sm mb-2 ${e?"text-gray-500":"text-gray-400"}`,children:[O.jsx(Of,{size:16}),O.jsx("span",{children:t.date})]}),O.jsx("h3",{className:`text-xl sm:text-2xl font-bold mb-3 ${e?"text-white":"text-gray-900"}`,children:t.title}),O.jsx("p",{className:`${e?"text-gray-400":"text-gray-600"}`,children:t.excerpt}),O.jsx("div",{className:"mt-3 flex flex-wrap gap-2",children:t.tags.map(i=>O.jsx("span",{className:`text-xs px-3 py-1 rounded-full ${e?"bg-gray-800 text-gray-300":"bg-gray-100 text-gray-600"}`,children:i},i))}),O.jsxs("div",{className:`mt-4 flex items-center gap-2 text-sm ${e?"text-blue-400":"text-blue-600"}`,children:["Read more",O.jsx(aS,{size:16})]})]})},t.id))})})}),nF=({isDarkMode:e})=>O.jsxs("div",{className:`min-h-screen ${e?"bg-black":"bg-white"}`,children:[O.jsx(za,{isDarkMode:e}),O.jsx("div",{className:"relative z-10",children:O.jsx(tF,{isDarkMode:e})})]}),rF=({isDarkMode:e})=>O.jsx("section",{className:"min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24",children:O.jsx("div",{className:"max-w-4xl w-full mx-auto",children:O.jsxs("div",{className:"relative",children:[O.jsx("div",{className:`absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-0.5 ${e?"bg-gray-800":"bg-gray-200"}`}),E0.map((t,n)=>O.jsxs(Tt.div,{initial:{opacity:0,x:n%2===0?-30:30},animate:{opacity:1,x:0},transition:{duration:.6,delay:n*.15},className:"relative mb-12 sm:mb-16",children:[O.jsx("div",{className:`hidden sm:block absolute left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full z-10 border-4 ${e?"bg-blue-500 border-gray-900":"bg-blue-500 border-white"}`}),O.jsx("div",{className:`sm:hidden absolute left-4 top-6 -translate-x-1/2 w-4 h-4 rounded-full z-10 border-4 ${e?"bg-blue-500 border-gray-900":"bg-blue-500 border-white"}`}),O.jsx("div",{className:`sm:w-1/2 ${n%2===0?"sm:pr-8":"sm:pl-8 sm:ml-auto"}`,children:O.jsxs(Xs,{to:`/diary/${t.id}`,className:`block ml-10 sm:ml-0 p-5 sm:p-6 rounded-2xl transition-all duration-300 group ${e?"bg-gray-900/50 hover:bg-gray-900":"bg-white hover:bg-gray-50"}`,children:[O.jsxs("div",{className:"flex flex-wrap items-center gap-3 mb-3",children:[O.jsxs("div",{className:`flex items-center gap-2 text-sm ${e?"text-gray-500":"text-gray-400"}`,children:[O.jsx(Of,{size:16}),O.jsx("span",{children:t.date})]}),t.weather&&O.jsxs("div",{className:`flex items-center gap-1.5 text-xs px-2 py-1 rounded-full ${e?"bg-gray-800 text-gray-300":"bg-gray-100 text-gray-600"}`,children:[O.jsx(lS,{size:14}),O.jsx("span",{children:t.weather})]}),t.mood&&O.jsxs("div",{className:`flex items-center gap-1.5 text-xs px-2 py-1 rounded-full ${e?"bg-gray-800 text-gray-300":"bg-gray-100 text-gray-600"}`,children:[O.jsx(uS,{size:14}),O.jsx("span",{children:t.mood})]})]}),O.jsx("h3",{className:`text-lg sm:text-xl font-bold mb-2 ${e?"text-white":"text-gray-900"}`,children:t.title}),O.jsx("p",{className:`text-sm line-clamp-2 mb-3 ${e?"text-gray-400":"text-gray-600"}`,children:t.excerpt}),O.jsx("div",{className:"flex flex-wrap gap-1.5 mb-3",children:t.tags.map(i=>O.jsx("span",{className:`text-xs px-2 py-0.5 rounded ${e?"bg-gray-800 text-gray-400":"bg-gray-100 text-gray-500"}`,children:i},i))}),O.jsxs("div",{className:`flex items-center gap-1.5 text-sm font-medium transition-colors group-hover:gap-2 ${e?"text-blue-400":"text-blue-600"}`,children:["阅读日记",O.jsx(aS,{size:16,className:"transform transition-transform group-hover:translate-x-1"})]})]})})]},t.id))]})})}),iF=({isDarkMode:e})=>O.jsxs("div",{className:`min-h-screen ${e?"bg-black":"bg-white"}`,children:[O.jsx(za,{isDarkMode:e}),O.jsx("div",{className:"relative z-10",children:O.jsx(rF,{isDarkMode:e})})]}),Ip=e=>typeof e=="string"?e:Array.isArray(e)?e.map(Ip).join(""):e&&typeof e=="object"&&Ke.isValidElement(e)?Ip(e.props.children):"",aF=({isDarkMode:e})=>{const{t}=ja(),{id:n}=Qx(),i=Ql(),s=({text:d})=>{const[p,g]=F.useState(!1),E=async()=>{try{await navigator.clipboard.writeText(d),g(!0),setTimeout(()=>g(!1),2e3)}catch(_){console.error("Failed to copy:",_)}};return O.jsx("button",{onClick:E,className:`absolute top-3 right-3 p-2 rounded-lg transition-all ${e?"bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white":"bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900"}`,title:t(p?"common.copied":"common.copyCode"),children:p?O.jsx(oS,{size:16}):O.jsx(cS,{size:16})})},l=E0.find(d=>d.id===n),f=l?(d=>{const p=d.replace(/[#*`[\]()_~]/g,"").replace(/\n/g," ").trim(),g=(p.match(/[\u4e00-\u9fa5]/g)||[]).length,E=p.split(/\s+/).filter(_=>_.length>0).length;return g+E})(l.content):0,h=`
+                            `}),O.jsx(KS,{remarkPlugins:[yA],rehypePlugins:[xv,FA],components:{pre:({children:d,...p})=>{const g=Lp(d);return O.jsxs("div",{className:"relative",children:[O.jsx("pre",{...p,children:d}),O.jsx(s,{text:g})]})},table:({children:d,...p})=>O.jsx("div",{className:"overflow-x-auto my-4",children:O.jsx("table",{...p,className:"min-w-full",children:d})})},children:l.content})]})]})]})})]}):O.jsxs("div",{className:`min-h-screen flex items-center justify-center ${e?"bg-black":"bg-white"}`,children:[O.jsx(za,{isDarkMode:e}),O.jsxs("div",{className:"relative z-10 text-center",children:[O.jsx("h1",{className:`text-2xl font-bold mb-4 ${e?"text-white":"text-gray-900"}`,children:t("articleNotFound.title")}),O.jsx("button",{onClick:()=>i("/articles"),className:`px-6 py-2 rounded-lg ${e?"bg-gray-800 text-white hover:bg-gray-700":"bg-blue-600 text-white hover:bg-blue-700"}`,children:t("common.backToArticles")})]})]})},tF=({isDarkMode:e})=>O.jsx("section",{className:"min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24",children:O.jsx("div",{className:"max-w-5xl w-full mx-auto",children:O.jsx("div",{className:"grid gap-6",children:y0.map((t,n)=>O.jsx(Tt.div,{initial:{opacity:0,y:30},animate:{opacity:1,y:0},transition:{duration:.5,delay:n*.1},whileHover:{y:-4},children:O.jsxs(Xs,{to:`/article/${t.id}`,className:`block p-6 sm:p-8 rounded-xl border cursor-pointer transition-all ${e?"bg-gray-900 border-gray-800 hover:border-gray-700":"bg-white border-gray-200 hover:border-gray-300"}`,children:[O.jsxs("div",{className:`flex items-center gap-2 text-sm mb-2 ${e?"text-gray-500":"text-gray-400"}`,children:[O.jsx(Of,{size:16}),O.jsx("span",{children:t.date})]}),O.jsx("h3",{className:`text-xl sm:text-2xl font-bold mb-3 ${e?"text-white":"text-gray-900"}`,children:t.title}),O.jsx("p",{className:`${e?"text-gray-400":"text-gray-600"}`,children:t.excerpt}),O.jsx("div",{className:"mt-3 flex flex-wrap gap-2",children:t.tags.map(i=>O.jsx("span",{className:`text-xs px-3 py-1 rounded-full ${e?"bg-gray-800 text-gray-300":"bg-gray-100 text-gray-600"}`,children:i},i))}),O.jsxs("div",{className:`mt-4 flex items-center gap-2 text-sm ${e?"text-blue-400":"text-blue-600"}`,children:["Read more",O.jsx(aS,{size:16})]})]})},t.id))})})}),nF=({isDarkMode:e})=>O.jsxs("div",{className:`min-h-screen ${e?"bg-black":"bg-white"}`,children:[O.jsx(za,{isDarkMode:e}),O.jsx("div",{className:"relative z-10",children:O.jsx(tF,{isDarkMode:e})})]}),rF=({isDarkMode:e})=>O.jsx("section",{style:{overflow:"hidden"},className:"min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24",children:O.jsx("div",{className:"max-w-4xl w-full mx-auto",children:O.jsxs("div",{className:"relative",children:[O.jsx("div",{className:`absolute left-4 sm:left-1/2 sm:-translate-x-px top-0 bottom-0 w-0.5 ${e?"bg-gray-800":"bg-gray-200"}`}),E0.map((t,n)=>O.jsxs(Tt.div,{initial:{opacity:0,x:n%2===0?-30:30},animate:{opacity:1,x:0},transition:{duration:.6,delay:n*.15},className:"relative mb-12 sm:mb-16",children:[O.jsx("div",{className:`hidden sm:block absolute left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full z-10 border-4 ${e?"bg-blue-500 border-gray-900":"bg-blue-500 border-white"}`}),O.jsx("div",{className:`sm:hidden absolute left-4 top-6 -translate-x-1/2 w-4 h-4 rounded-full z-10 border-4 ${e?"bg-blue-500 border-gray-900":"bg-blue-500 border-white"}`}),O.jsx("div",{className:`sm:w-1/2 ${n%2===0?"sm:pr-8":"sm:pl-8 sm:ml-auto"}`,children:O.jsxs(Xs,{to:`/diary/${t.id}`,className:`block ml-10 sm:ml-0 p-5 sm:p-6 rounded-2xl transition-all duration-300 group ${e?"bg-gray-900/50 hover:bg-gray-900":"bg-white hover:bg-gray-50"}`,children:[O.jsxs("div",{className:"flex flex-wrap items-center gap-3 mb-3",children:[O.jsxs("div",{className:`flex items-center gap-2 text-sm ${e?"text-gray-500":"text-gray-400"}`,children:[O.jsx(Of,{size:16}),O.jsx("span",{children:t.date})]}),t.weather&&O.jsxs("div",{className:`flex items-center gap-1.5 text-xs px-2 py-1 rounded-full ${e?"bg-gray-800 text-gray-300":"bg-gray-100 text-gray-600"}`,children:[O.jsx(lS,{size:14}),O.jsx("span",{children:t.weather})]}),t.mood&&O.jsxs("div",{className:`flex items-center gap-1.5 text-xs px-2 py-1 rounded-full ${e?"bg-gray-800 text-gray-300":"bg-gray-100 text-gray-600"}`,children:[O.jsx(uS,{size:14}),O.jsx("span",{children:t.mood})]})]}),O.jsx("h3",{className:`text-lg sm:text-xl font-bold mb-2 ${e?"text-white":"text-gray-900"}`,children:t.title}),O.jsx("p",{className:`text-sm line-clamp-2 mb-3 ${e?"text-gray-400":"text-gray-600"}`,children:t.excerpt}),O.jsx("div",{className:"flex flex-wrap gap-1.5 mb-3",children:t.tags.map(i=>O.jsx("span",{className:`text-xs px-2 py-0.5 rounded ${e?"bg-gray-800 text-gray-400":"bg-gray-100 text-gray-500"}`,children:i},i))}),O.jsxs("div",{className:`flex items-center gap-1.5 text-sm font-medium transition-colors group-hover:gap-2 ${e?"text-blue-400":"text-blue-600"}`,children:["阅读日记",O.jsx(aS,{size:16,className:"transform transition-transform group-hover:translate-x-1"})]})]})})]},t.id))]})})}),iF=({isDarkMode:e})=>O.jsxs("div",{className:`min-h-screen ${e?"bg-black":"bg-white"}`,children:[O.jsx(za,{isDarkMode:e}),O.jsx("div",{className:"relative z-10",children:O.jsx(rF,{isDarkMode:e})})]}),Ip=e=>typeof e=="string"?e:Array.isArray(e)?e.map(Ip).join(""):e&&typeof e=="object"&&Ke.isValidElement(e)?Ip(e.props.children):"",aF=({isDarkMode:e})=>{const{t}=ja(),{id:n}=Qx(),i=Ql(),s=({text:d})=>{const[p,g]=F.useState(!1),E=async()=>{try{await navigator.clipboard.writeText(d),g(!0),setTimeout(()=>g(!1),2e3)}catch(_){console.error("Failed to copy:",_)}};return O.jsx("button",{onClick:E,className:`absolute top-3 right-3 p-2 rounded-lg transition-all ${e?"bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white":"bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900"}`,title:t(p?"common.copied":"common.copyCode"),children:p?O.jsx(oS,{size:16}):O.jsx(cS,{size:16})})},l=E0.find(d=>d.id===n),f=l?(d=>{const p=d.replace(/[#*`[\]()_~]/g,"").replace(/\n/g," ").trim(),g=(p.match(/[\u4e00-\u9fa5]/g)||[]).length,E=p.split(/\s+/).filter(_=>_.length>0).length;return g+E})(l.content):0,h=`
         .markdown-body h1 { font-size: 2em; font-weight: 700; margin: 1em 0 0.5em; }
         .markdown-body h2 { font-size: 1.5em; font-weight: 600; margin: 1em 0 0.5em; }
         .markdown-body h3 { font-size: 1.25em; font-weight: 600; margin: 1em 0 0.5em; }
