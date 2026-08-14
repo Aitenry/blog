@@ -8,11 +8,17 @@ interface NotFoundBoxProps {
     desc: string;
     backLabel: string;
     onBack: () => void;
+    /** 独立 404 页时占满全屏；站内缺失状态用 70vh */
+    fullScreen?: boolean;
 }
 
-const NotFoundBox: FC<NotFoundBoxProps> = ({code, title, desc, backLabel, onBack}) => {
+const NotFoundBox: FC<NotFoundBoxProps> = ({code, title, desc, backLabel, onBack, fullScreen = false}) => {
     return (
-        <div className="relative flex min-h-[70vh] items-center justify-center px-4">
+        <div
+            className={`relative flex items-center justify-center px-4 ${
+                fullScreen ? 'min-h-[100svh]' : 'min-h-[70vh]'
+            }`}
+        >
             <div className="w-full max-w-md border border-line bg-[var(--paper)] p-10 shadow-[8px_8px_0_0_var(--ink)]">
                 <p className="eyebrow text-accent">{code}</p>
                 <h1 className="mt-4 font-display text-4xl font-semibold">{title}</h1>

@@ -1,7 +1,7 @@
 // App.tsx
 import {lazy, Suspense, useCallback, useEffect, useState} from 'react';
 import {useScroll, useSpring} from 'framer-motion';
-import {BrowserRouter, Navigate, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import {BrowserRouter, Navigate, Outlet, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import Navigation from './components/Navigation';
 import ProgressBar from './components/ProgressBar';
@@ -102,44 +102,56 @@ const AppContent = () => {
             data-theme={isDarkMode ? 'dark' : 'light'}
             className="font-sans relative min-h-screen overflow-x-clip bg-[var(--paper)] text-ink transition-colors duration-300"
         >
-            {/* 无障碍：跳转到主内容 */}
-            <a
-                href="#main"
-                onClick={(e) => {
-                    e.preventDefault();
-                    const main = document.getElementById('main');
-                    main?.focus();
-                    main?.scrollIntoView();
-                }}
-                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-paper"
-            >
-                {t('navigation.skip')}
-            </a>
             <NoiseOverlay/>
-            <ProgressBar scaleX={scaleX}/>
-            <Navigation
-                activeSection={activeSection}
-                isDarkMode={isDarkMode}
-                onToggleTheme={toggleTheme}
-                handleNavClick={handleNavClick}
-            />
-            <main id="main" tabIndex={-1} className="relative z-10 pt-16 focus:outline-none">
-                <Suspense fallback={<PageFallback/>}>
-                    <Routes>
-                        {/* 根路径 → 首页 */}
-                        <Route path="/" element={<Navigate to="/home" replace/>}/>
-                        <Route path="/home"
-                               element={<HomePage isDarkMode={isDarkMode} scrollToNextSection={scrollToNextSection}/>}/>
-                        <Route path="/articles" element={<ArticlesPage/>}/>
-                        <Route path="/article/:id" element={<ArticlePage/>}/>
-                        <Route path="/diaries" element={<DiariesPage/>}/>
-                        <Route path="/diary/:id" element={<DiaryPage/>}/>
-                        <Route path="*" element={<NotFoundPage/>}/>
-                    </Routes>
-                </Suspense>
-            </main>
-            <Footer/>
-            <BackToTop/>
+            <Routes>
+                {/* 根路径 → 首页 */}
+                <Route path="/" element={<Navigate to="/home" replace/>}/>
+
+                {/* 带应用外壳的页面：顶部栏 + 页脚 */}
+                <Route
+                    element={
+                        <>
+                            {/* 无障碍：跳转到主内容 */}
+                            <a
+                                href="#main"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const main = document.getElementById('main');
+                                    main?.focus();
+                                    main?.scrollIntoView();
+                                }}
+                                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-paper"
+                            >
+                                {t('navigation.skip')}
+                            </a>
+                            <ProgressBar scaleX={scaleX}/>
+                            <Navigation
+                                activeSection={activeSection}
+                                isDarkMode={isDarkMode}
+                                onToggleTheme={toggleTheme}
+                                handleNavClick={handleNavClick}
+                            />
+                            <main id="main" tabIndex={-1} className="relative z-10 pt-16 focus:outline-none">
+                                <Suspense fallback={<PageFallback/>}>
+                                    <Outlet/>
+                                </Suspense>
+                            </main>
+                            <Footer/>
+                            <BackToTop/>
+                        </>
+                    }
+                >
+                    <Route path="/home"
+                           element={<HomePage isDarkMode={isDarkMode} scrollToNextSection={scrollToNextSection}/>}/>
+                    <Route path="/articles" element={<ArticlesPage/>}/>
+                    <Route path="/article/:id" element={<ArticlePage/>}/>
+                    <Route path="/diaries" element={<DiariesPage/>}/>
+                    <Route path="/diary/:id" element={<DiaryPage/>}/>
+                </Route>
+
+                {/* 独立 404：无顶部栏、无页脚 */}
+                <Route path="*" element={<NotFoundPage/>}/>
+            </Routes>
         </div>
     );
 };

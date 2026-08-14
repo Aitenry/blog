@@ -11,6 +11,7 @@ const NotFoundPage: React.FC = () => {
 
     return (
         <NotFoundBox
+            fullScreen
             code="404 — PAGE NOT FOUND"
             title={t('notFound.title')}
             desc={t('notFound.desc')}
