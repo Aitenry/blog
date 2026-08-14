@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Aitenry · 写代码，也写生活</title>
+</head>
+<body>
+  <script>
+    // GitHub Pages SPA 回退：把目标路径存入 sessionStorage 后跳回根路径，
+    // 由 main.tsx 在应用启动时恢复 URL 并交给 BrowserRouter 路由。
+    sessionStorage.setItem('redirect', location.pathname + location.search)
+    location.replace('/')
+  </script>
+</body>
+</html>
