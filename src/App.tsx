@@ -1,7 +1,7 @@
 // App.tsx
 import {lazy, Suspense, useCallback, useEffect, useState} from 'react';
 import {useScroll, useSpring} from 'framer-motion';
-import {BrowserRouter, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import {BrowserRouter, Navigate, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import Navigation from './components/Navigation';
 import ProgressBar from './components/ProgressBar';
@@ -126,6 +126,8 @@ const AppContent = () => {
             <main id="main" tabIndex={-1} className="relative z-10 pt-16 focus:outline-none">
                 <Suspense fallback={<PageFallback/>}>
                     <Routes>
+                        {/* 根路径 → 首页 */}
+                        <Route path="/" element={<Navigate to="/home" replace/>}/>
                         <Route path="/home"
                                element={<HomePage isDarkMode={isDarkMode} scrollToNextSection={scrollToNextSection}/>}/>
                         <Route path="/articles" element={<ArticlesPage/>}/>
