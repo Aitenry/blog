@@ -8,6 +8,7 @@ import ProgressBar from './components/ProgressBar';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import NoiseOverlay from './components/ui/NoiseOverlay';
+import Particles from './components/ui/Particles';
 import HomePage from './pages/HomePage';
 import ArticlesPage from './pages/ArticlesPage';
 import DiariesPage from './pages/DiariesPage';
@@ -81,10 +82,6 @@ const AppContent = () => {
         });
     }, []);
 
-    const scrollToNextSection = () => {
-        document.getElementById('about')?.scrollIntoView({behavior: 'smooth'});
-    };
-
     const handleNavClick: NavProps['handleNavClick'] = (e, sectionId) => {
         e.preventDefault();
 
@@ -103,6 +100,12 @@ const AppContent = () => {
             className="font-sans relative min-h-screen overflow-x-clip bg-[var(--paper)] text-ink transition-colors duration-300"
         >
             <NoiseOverlay/>
+            {/* 墨色粒子背景（React Bits 风格，主题感知） */}
+            <Particles
+                quantity={80}
+                size={1.5}
+                color={isDarkMode ? [0.929, 0.914, 0.875] : [0.106, 0.098, 0.082]}
+            />
             <Routes>
                 {/* 根路径 → 首页 */}
                 <Route path="/" element={<Navigate to="/home" replace/>}/>
@@ -142,7 +145,7 @@ const AppContent = () => {
                     }
                 >
                     <Route path="/home"
-                           element={<HomePage isDarkMode={isDarkMode} scrollToNextSection={scrollToNextSection}/>}/>
+                           element={<HomePage isDarkMode={isDarkMode}/>}/>
                     <Route path="/articles" element={<ArticlesPage/>}/>
                     <Route path="/article/:id" element={<ArticlePage/>}/>
                     <Route path="/diaries" element={<DiariesPage/>}/>

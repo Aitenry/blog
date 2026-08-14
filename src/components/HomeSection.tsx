@@ -1,4 +1,4 @@
-// components/HomeSection.tsx — Hero：编辑风格大标题 + 状态行 + 数据表
+// components/HomeSection.tsx — Hero：编辑风格大标题 + 状态行 + CTA + 数据表
 import {motion} from 'framer-motion';
 import {RiArrowDownLine, RiArrowRightLine} from '@remixicon/react';
 import {useNavigate} from 'react-router-dom';
@@ -10,11 +10,7 @@ import {diaries} from '../data/diaries';
 import {projects} from '../data/projects';
 import {skills} from '../data/skills';
 
-interface HomeSectionProps {
-    scrollToNextSection: () => void;
-}
-
-const HomeSection: React.FC<HomeSectionProps> = ({scrollToNextSection}) => {
+const HomeSection: React.FC = () => {
     const {t} = useTranslation();
     const navigate = useNavigate();
 
@@ -28,11 +24,11 @@ const HomeSection: React.FC<HomeSectionProps> = ({scrollToNextSection}) => {
     return (
         <section
             id="home"
-            className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center px-4 py-20 sm:px-6 md:px-8"
+            className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center px-4 py-10 sm:px-6 sm:py-12 md:px-8"
         >
             <div className="mx-auto w-full max-w-6xl">
                 {/* 大标题 */}
-                <h1 className="mt-8 font-display text-[13vw] font-semibold leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl">
+                <h1 className="font-display text-[13vw] font-semibold leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl">
                     <span className="block overflow-hidden pb-1">
                         <motion.span
                             initial={{y: '110%'}}
@@ -58,14 +54,14 @@ const HomeSection: React.FC<HomeSectionProps> = ({scrollToNextSection}) => {
 
                 {/* 角色行 */}
                 <Reveal delay={0.3}>
-                    <p className="mt-8 font-mono text-sm text-mute sm:text-base">{t('home.roles')}</p>
+                    <p className="mt-6 font-mono text-sm text-mute sm:text-base">{t('home.roles')}</p>
                 </Reveal>
 
-                {/* 现在状态 */}
+                {/* 现在状态（flex 垂直居中：光标块与文字、链接同一中线） */}
                 <Reveal delay={0.38}>
-                    <p className="mt-3 font-mono text-sm sm:text-base">
-                        <span className="blink mr-2 inline-block h-3 w-2 translate-y-0.5 bg-[var(--accent)]"/>
-                        {t('home.nowPrefix')}{' '}
+                    <p className="mt-3 flex items-center gap-2 font-mono text-sm sm:text-base">
+                        <span className="blink inline-block h-3 w-2 shrink-0 bg-[var(--accent)]"/>
+                        <span>{t('home.nowPrefix')}</span>
                         <a
                             href="https://github.com/Aitenry/RytenBench"
                             target="_blank"
@@ -79,7 +75,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({scrollToNextSection}) => {
 
                 {/* CTA */}
                 <Reveal delay={0.46}>
-                    <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                         <button
                             onClick={() => navigate('/articles')}
                             className="group inline-flex cursor-pointer items-center justify-center gap-2 border border-[var(--ink)] bg-ink px-7 py-3.5 text-sm font-semibold text-paper transition-colors duration-300 hover:border-[var(--accent)] hover:bg-accent hover:text-[var(--accent-ink)]"
@@ -107,7 +103,7 @@ const HomeSection: React.FC<HomeSectionProps> = ({scrollToNextSection}) => {
 
                 {/* 数据表 */}
                 <Reveal delay={0.55}>
-                    <div className="mt-20 grid grid-cols-2 border-t border-line sm:grid-cols-4">
+                    <div className="mt-12 grid grid-cols-2 border-t border-line sm:grid-cols-4">
                         {stats.map((stat, index) => (
                             <div
                                 key={stat.label}
@@ -122,22 +118,6 @@ const HomeSection: React.FC<HomeSectionProps> = ({scrollToNextSection}) => {
                     </div>
                 </Reveal>
             </div>
-
-            {/* 滚动提示（仅竖线动画） */}
-            <motion.button
-                onClick={scrollToNextSection}
-                aria-label={t('home.scroll')}
-                initial={{opacity: 0}}
-                animate={{opacity: 1}}
-                transition={{delay: 1.2, duration: 0.6}}
-                className="absolute bottom-8 left-1/2 flex -translate-x-1/2 cursor-pointer flex-col items-center"
-            >
-                <motion.span
-                    animate={{y: [0, 10, 0], opacity: [1, 0.3, 1]}}
-                    transition={{duration: 1.8, repeat: Infinity, ease: 'easeInOut'}}
-                    className="block h-9 w-px bg-[var(--ink)]"
-                />
-            </motion.button>
         </section>
     );
 };

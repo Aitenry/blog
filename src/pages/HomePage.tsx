@@ -8,18 +8,17 @@ import {useTranslation} from 'react-i18next';
 
 interface HomePageProps {
     isDarkMode: boolean;
-    scrollToNextSection: () => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({isDarkMode, scrollToNextSection}) => {
+const HomePage: React.FC<HomePageProps> = ({isDarkMode}) => {
     const {t} = useTranslation();
     const marqueeItems = t('home.marquee', {returnObjects: true}) as string[];
 
     return (
         <>
-            <HomeSection scrollToNextSection={scrollToNextSection}/>
-            {/* 斜向跑马灯彩带 */}
-            <div className="relative z-10 -mx-2 rotate-[-1.2deg] sm:mx-0">
+            <HomeSection/>
+            {/* 斜向跑马灯彩带（负上边距上移，嵌入 Hero 底部） */}
+            <div className="relative z-10 -mx-2 -mt-8 rotate-[-1.2deg] sm:mx-0 sm:-mt-10">
                 <Marquee items={marqueeItems}/>
             </div>
             <AboutSection/>
