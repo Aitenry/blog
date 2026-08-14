@@ -17,8 +17,8 @@ export const projects: Project[] = [
         title: 'RytenBench',
         descriptionKey: 'projects.rytenDescription',
         tech: ['Electron', 'React', 'TypeScript', 'AI'],
-        imageLight: 'ryten-light.svg',
-        imageDark: 'ryten-dark.svg',
+        imageLight: '/ryten-light.svg',
+        imageDark: '/ryten-dark.svg',
         github: 'https://github.com/Aitenry/RytenBench',
         status: 'active'
     },
@@ -27,8 +27,8 @@ export const projects: Project[] = [
         title: 'IIMS-By-AI',
         descriptionKey: 'projects.iimsDescription',
         tech: ['Java', 'Vue', 'SpringBoot', 'TypeScript', 'AI'],
-        imageLight: 'iims-light.svg',
-        imageDark: 'iims-dark.svg',
+        imageLight: '/iims-light.svg',
+        imageDark: '/iims-dark.svg',
         github: 'https://github.com/Aitenry/IIMS-By-AI',
         status: 'acquired'
     }

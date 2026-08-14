@@ -3,8 +3,9 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-    // 相对路径：兼容 GitHub Pages 子路径（/blog/）与自定义域名根路径
-    base: './',
+    // 站点部署在自定义域名根路径（www.aitenry.cn），且使用 BrowserRouter：
+    // 资源必须用根绝对路径，否则 /article/1 这类嵌套路由下相对路径会解析错位
+    base: '/',
     plugins: [tailwindcss(), react()],
     build: {
         chunkSizeWarningLimit: 600,

@@ -1,7 +1,7 @@
 // App.tsx
 import {lazy, Suspense, useCallback, useEffect, useState} from 'react';
 import {useScroll, useSpring} from 'framer-motion';
-import {HashRouter, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useLocation, useNavigate} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import Navigation from './components/Navigation';
 import ProgressBar from './components/ProgressBar';
@@ -144,9 +144,9 @@ const AppContent = () => {
 
 const App = () => {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <AppContent/>
-        </HashRouter>
+        </BrowserRouter>
     );
 };
 
