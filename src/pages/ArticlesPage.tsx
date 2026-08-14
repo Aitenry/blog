@@ -1,18 +1,15 @@
+// pages/ArticlesPage.tsx
+import {useTranslation} from 'react-i18next';
 import ArticleSection from '../components/ArticleSection';
-import SnowBackground from '../components/SnowBackground';
-import React from 'react';
+import {usePageTitle} from '../hooks/usePageTitle';
 
-interface ArticlesPageProps {
-    isDarkMode: boolean;
-}
+const ArticlesPage: React.FC = () => {
+    const {t} = useTranslation();
+    usePageTitle(t('articles.title'));
 
-const ArticlesPage: React.FC<ArticlesPageProps> = ({ isDarkMode }) => {
     return (
-        <div className={`min-h-screen ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
-            <SnowBackground isDarkMode={isDarkMode} />
-            <div className="relative z-10">
-                <ArticleSection isDarkMode={isDarkMode} />
-            </div>
+        <div className="relative min-h-screen">
+            <ArticleSection/>
         </div>
     );
 };

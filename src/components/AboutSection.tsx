@@ -1,80 +1,71 @@
-// AboutSection.tsx
-import { motion } from 'framer-motion';
-import type {SectionProps} from '../types/app.ts';
-import React from "react";
-import { useTranslation } from 'react-i18next';
+// components/AboutSection.tsx — 关于我：左右分栏 + 元信息表 + 引言
+import {useTranslation} from 'react-i18next';
+import Eyebrow from './ui/Eyebrow';
+import Reveal from './ui/Reveal';
 
-const AboutSection: React.FC<SectionProps> = ({ isDarkMode }) => {
-    const { t } = useTranslation();
-    
+const AboutSection: React.FC = () => {
+    const {t} = useTranslation();
+    const meta = t('about.meta', {returnObjects: true}) as string[];
+    const tags = t('about.tags', {returnObjects: true}) as string[];
+
     return (
-        <section
-            id="about"
-            className={`min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24 flex items-center ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`
-            }>
-            <div className="max-w-4xl w-full mx-auto">
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-12 sm:mb-16"
-                >
-                    <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        {t('about.title')}
-                    </h2>
-                    <div className={`w-12 sm:w-16 h-0.5 mx-auto ${isDarkMode ? 'bg-gray-700' : 'bg-blue-200'} rounded-full`} />
-                </motion.div>
+        <section id="about" className="h-rule px-4 py-28 sm:px-6 sm:py-36 md:px-8">
+            <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-12">
+                {/* 左栏：标签 + 元信息表 */}
+                <div className="lg:col-span-4">
+                    <Reveal>
+                        <Eyebrow>01 — {t('about.eyebrow')}</Eyebrow>
+                    </Reveal>
+                    <Reveal delay={0.05}>
+                        <h2 className="mt-5 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+                            {t('about.title')}
+                        </h2>
+                    </Reveal>
+                    <Reveal delay={0.12}>
+                        <dl className="mt-12 border-t border-line">
+                            {meta.map((row, index) => {
+                                const [key, value] = row.split(' · ');
+                                return (
+                                    <div
+                                        key={index}
+                                        className="flex items-baseline justify-between gap-4 border-b border-line py-3.5"
+                                    >
+                                        <dt className="eyebrow text-mute">{key}</dt>
+                                        <dd className="font-mono text-sm">{value}</dd>
+                                    </div>
+                                );
+                            })}
+                        </dl>
+                    </Reveal>
+                </div>
 
-                <div className="space-y-6 sm:space-y-8 max-w-3xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 sm:p-6 lg:p-8 rounded-xl border`}
-                    >
-                        <h3 className={`text-xl sm:text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-3 sm:mb-4`}>
-                            {t('about.profile')}
-                        </h3>
-                        <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base`}>
-                            {t('about.profileDesc1')}
-                        </p>
-                        <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-700'} leading-relaxed text-sm sm:text-base`}>
-                            {t('about.profileDesc2')}
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 sm:p-6 lg:p-8 rounded-xl border`}
-                    >
-                        <h3 className={`text-xl sm:text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-3 sm:mb-4`}>
-                            {t('about.interests')}
-                        </h3>
-                        <ul className={`space-y-2 sm:space-y-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} text-sm sm:text-base`}>
-                            <li className="flex items-start">
-                                <span className={`${isDarkMode ? 'text-white' : 'text-blue-500'} mr-2 flex-shrink-0`}>•</span>
-                                <span>{t('about.interest1')}</span>
-                            </li>
-                            <li className="flex items-start">
-                                <span className={`${isDarkMode ? 'text-white' : 'text-blue-500'} mr-2 flex-shrink-0`}>•</span>
-                                <span>{t('about.interest2')}</span>
-                            </li>
-                            <li className="flex items-start">
-                                <span className={`${isDarkMode ? 'text-white' : 'text-blue-500'} mr-2 flex-shrink-0`}>•</span>
-                                <span>{t('about.interest3')}</span>
-                            </li>
-                        </ul>
-
-                        <div className={`${isDarkMode ? 'border-t border-gray-700' : 'border-t border-gray-100'} mt-4 sm:mt-6 pt-3 sm:pt-4`}>
-                            <blockquote className={`italic ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} text-center text-sm sm:text-base`}>
-                                "{t('about.quote')}"
-                            </blockquote>
+                {/* 右栏：正文 + 引言 */}
+                <div className="lg:col-span-7 lg:col-start-6">
+                    <Reveal delay={0.1}>
+                        <p className="text-lg leading-relaxed sm:text-xl">{t('about.desc1')}</p>
+                    </Reveal>
+                    <Reveal delay={0.16}>
+                        <p className="mt-6 leading-relaxed text-mute">{t('about.desc2')}</p>
+                    </Reveal>
+                    <Reveal delay={0.22}>
+                        <blockquote className="mt-14 border-l-2 border-[var(--accent)] pl-6">
+                            <p className="font-display text-2xl italic leading-snug sm:text-3xl">
+                                “{t('about.quote')}”
+                            </p>
+                        </blockquote>
+                    </Reveal>
+                    <Reveal delay={0.28}>
+                        <div className="mt-10 flex flex-wrap gap-2">
+                            {tags.map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="border border-line px-3 py-1.5 font-mono text-xs text-mute transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                                >
+                                    {tag}
+                                </span>
+                            ))}
                         </div>
-                    </motion.div>
+                    </Reveal>
                 </div>
             </div>
         </section>

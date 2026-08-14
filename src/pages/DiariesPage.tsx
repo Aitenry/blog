@@ -1,18 +1,15 @@
+// pages/DiariesPage.tsx
+import {useTranslation} from 'react-i18next';
 import DiarySection from '../components/DiarySection';
-import SnowBackground from '../components/SnowBackground';
-import React from 'react';
+import {usePageTitle} from '../hooks/usePageTitle';
 
-interface DiariesPageProps {
-    isDarkMode: boolean;
-}
+const DiariesPage: React.FC = () => {
+    const {t} = useTranslation();
+    usePageTitle(t('diaries.title'));
 
-const DiariesPage: React.FC<DiariesPageProps> = ({ isDarkMode }) => {
     return (
-        <div className={`min-h-screen ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
-            <SnowBackground isDarkMode={isDarkMode} />
-            <div className="relative z-10">
-                <DiarySection isDarkMode={isDarkMode} />
-            </div>
+        <div className="relative min-h-screen">
+            <DiarySection/>
         </div>
     );
 };

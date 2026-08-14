@@ -1,13 +1,9 @@
 // app.ts
-import React from "react";
-
-export interface SectionProps {
-    isDarkMode: boolean;
-    activeSection?: string; // 可选，因为并非所有section都需要它
-}
+import type React from "react";
 
 export interface NavProps {
     activeSection: string;
     isDarkMode: boolean;
+    onToggleTheme: () => void;
     handleNavClick: (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => void;
 }

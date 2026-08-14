@@ -1,52 +1,102 @@
 export default {
-  navigation: {
-    home: 'Home',
-    diaries: 'Diaries',
-    articles: 'Articles',
-    search: 'Search',
-    typeToSearch: 'Type to search...',
-    startTypingToSearch: 'Start typing to search',
-    noArticlesFound: 'No articles found',
-    tryADifferentSearchTerm: 'Try a different search term'
-  },
-  common: {
-    back: 'Back',
-    copy: 'Copy',
-    copied: 'Copied!',
-    copyCode: 'Copy code',
-    publishedOn: 'Published on',
-    words: 'words',
-    backToArticles: 'Back to Articles',
-    backToDiaries: 'Back to Diaries'
-  },
-  articleNotFound: {
-    title: 'Article not found'
-  },
-  diaryNotFound: {
-    title: 'Diary not found'
-  },
-  home: {
-    title: 'Full Stack Developer',
-    subtitle: 'AI-Powered Intelligent Systems & Cross-Platform Applications',
-    description: 'Deeply integrating cutting-edge artificial intelligence technologies with modern Web development frameworks to build intelligent, responsive, and user-friendly next-generation Web applications'
-  },
-  about: {
-    title: 'About Me',
-    profile: 'My Profile',
-    profileDesc1: 'I am a developer specializing in the integration of AI and Web technologies, dedicated to building intelligent systems and AI-powered applications. I actively contribute to open-source projects within the open-source community, driven by the belief that technology can create a better future.',
-    profileDesc2: 'I am passionate about exploring technical frontiers, with a particular focus on applying AI within the information management domain. I prioritize code quality and user experience, constantly striving for simple yet efficient solutions.',
-    interests: 'Interests & Philosophy',
-    interest1: 'Open Source Contribution: Actively maintaining multiple open-source projects related to AI and Web technologies.',
-    interest2: 'Technical Exploration: Continuously learning the latest trends in AI and Web development.',
-    interest3: 'Design Thinking: Focusing on user experience and interface details, pursuing the balance between functionality and aesthetics.',
-    quote: 'Life is measured by thought and action not by time.'
-  },
-  skills: {
-    title: 'Tech Stack'
-  },
-  projects: {
-    title: 'Open Source Project',
-    iimsDescription: 'AI-Powered Intelligent Information Management Platform',
-    rytenDescription: 'Lightweight Personal AI Workbench'
-  }
+    siteTitle: 'Aitenry · Write code, live a life',
+    navigation: {
+        home: 'Home',
+        diaries: 'Diaries',
+        articles: 'Articles',
+        search: 'Search',
+        typeToSearch: 'Search articles & diaries…',
+        startTypingToSearch: 'Start typing to search',
+        noArticlesFound: 'Nothing found',
+        tryADifferentSearchTerm: 'Try another keyword',
+        toggleTheme: 'Toggle theme',
+        skip: 'Skip to content',
+        kbdHint: '↑↓ navigate · ⏎ open · ESC close'
+    },
+    notFound: {
+        title: 'Page not found',
+        desc: 'The page you are looking for does not exist or has been removed.',
+        back: 'Back to Home'
+    },
+    common: {
+        back: 'Back',
+        copy: 'Copy',
+        copied: 'Copied',
+        copyCode: 'Copy code',
+        publishedOn: 'Published on',
+        words: 'words',
+        minRead: 'min',
+        backToArticles: 'Back to Articles',
+        backToDiaries: 'Back to Diaries',
+        readMore: 'Read more',
+        readDiary: 'Read diary',
+        backToTop: 'Back to top',
+        prev: 'Previous',
+        next: 'Next',
+        tableOfContents: 'Contents',
+        all: 'All',
+        reading: 'Reading'
+    },
+    articleNotFound: {
+        title: 'Article not found',
+        desc: 'This article may have been removed, or the link is broken.',
+        back: 'Back to Articles'
+    },
+    diaryNotFound: {
+        title: 'Diary not found',
+        desc: 'This diary may have been removed, or the link is broken.',
+        back: 'Back to Diaries'
+    },
+    home: {
+        headline1: 'Write code,',
+        headline2: 'live a life',
+        roles: 'Full-Stack Developer · Product Designer · Open-Source Contributor',
+        nowPrefix: 'NOW: Building',
+        nowTarget: 'RytenBench',
+        ctaArticles: 'Read Articles',
+        ctaProjects: 'View Projects',
+        statsArticles: 'Articles',
+        statsDiaries: 'Diaries',
+        statsProjects: 'Projects',
+        statsSkills: 'Skills',
+        scroll: 'Scroll',
+        marquee: ['FULL-STACK', 'AI APPS', 'OPEN SOURCE', 'TYPESCRIPT', 'JAVA', 'VUE', 'WRITING', 'DESIGN', 'READING', 'HACKING', 'COFFEE', 'MIDNIGHT']
+    },
+    about: {
+        eyebrow: 'About',
+        title: 'About Me',
+        meta: ['Location · China', 'Status · Building', 'Now · RytenBench'],
+        desc1: 'A developer focused on blending AI with the web, building intelligent systems and AI-powered applications. I believe technology can create a better future — and that there is more to life than code.',
+        desc2: 'I explore the technical frontier, especially how AI lands in information management. I care about code quality and user experience, always chasing simple yet efficient solutions.',
+        quote: 'Life is measured by thought and action, not by time.',
+        tags: ['AI Apps', 'Web Full-Stack', 'Open Source', 'Design']
+    },
+    skills: {
+        eyebrow: 'Stack',
+        title: 'Tech Stack'
+    },
+    projects: {
+        eyebrow: 'Projects',
+        title: 'Open Source',
+        iimsDescription: 'AI-powered intelligent information management platform (acquired)',
+        rytenDescription: 'Lightweight personal AI workbench',
+        viewProject: 'View project',
+        statusActive: 'Active',
+        statusAcquired: 'Acquired'
+    },
+    articles: {
+        eyebrow: 'Articles',
+        title: 'Articles',
+        total: 'TOTAL'
+    },
+    diaries: {
+        eyebrow: 'Diaries',
+        title: 'Diaries',
+        total: 'TOTAL'
+    },
+    footer: {
+        eyebrow: 'TO BE CONTINUED',
+        closing: 'Stay curious, keep building.',
+        rights: 'All rights reserved'
+    }
 };

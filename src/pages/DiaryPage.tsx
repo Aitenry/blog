@@ -1,235 +1,170 @@
-import { motion } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
-import rehypeRaw from 'rehype-raw';
-import { useParams, useNavigate } from 'react-router-dom';
-import React, {type ReactElement, useState} from 'react';
-import { diaries as loadedDiaries } from '../data/diaries';
-import SnowBackground from '../components/SnowBackground';
-import { RiCheckLine, RiFileCopyLine, RiArrowLeftLine, RiCalendarLine, RiCloudyLine, RiEmotionHappyLine, RiBookOpenLine } from '@remixicon/react';
-import { useTranslation } from 'react-i18next';
+// pages/DiaryPage.tsx — 日记详情：编辑排版 + 天气心情 + 上下篇
+import {motion} from 'framer-motion';
+import {RiArrowLeftLine, RiArrowRightLine} from '@remixicon/react';
+import {Link, useNavigate, useParams} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {diaries} from '../data/diaries';
+import {calculateWordCount, extractToc, readingTime} from '../utils/content';
+import MarkdownContent from '../components/MarkdownContent';
+import TocPanel from '../components/TocPanel';
+import NotFoundBox from '../components/ui/NotFoundBox';
+import {EASE} from '../components/ui/Reveal';
+import {usePageTitle} from '../hooks/usePageTitle';
 
-interface DiaryPageProps {
-    isDarkMode: boolean;
-}
-
-const extractTextFromChildren = (children: React.ReactNode | string): string => {
-    if (typeof children === 'string') {
-        return children;
-    }
-
-    if (Array.isArray(children)) {
-        return children.map(extractTextFromChildren).join('');
-    }
-
-    if (children && typeof children === 'object' && React.isValidElement(children)) {
-        const element = children as ReactElement<{ children?: React.ReactNode }>;
-        return extractTextFromChildren(element.props.children);
-    }
-
-    return '';
-};
-
-const DiaryPage: React.FC<DiaryPageProps> = ({ isDarkMode }) => {
-    const { t } = useTranslation();
-    const { id } = useParams<{ id: string }>();
+const DiaryPage: React.FC = () => {
+    const {t} = useTranslation();
+    const {id} = useParams<{id: string}>();
     const navigate = useNavigate();
 
-    const CopyButton = ({ text }: { text: string }) => {
-        const [copied, setCopied] = useState(false);
+    const diary = diaries.find((d) => d.id === id);
+    const toc = diary ? extractToc(diary.content) : [];
+    const [activeId, setActiveId] = useState('');
 
-        const handleCopy = async () => {
-            try {
-                await navigator.clipboard.writeText(text);
-                setCopied(true);
-                setTimeout(() => setCopied(false), 2000);
-            } catch (err) {
-                console.error('Failed to copy:', err);
-            }
+    usePageTitle(diary ? diary.title : t('diaryNotFound.title'));
+
+    // 目录滚动高亮
+    useEffect(() => {
+        if (!diary || toc.length === 0) return;
+        const headings = toc
+            .map((item) => document.getElementById(item.id))
+            .filter((el): el is HTMLElement => el !== null);
+
+        let frame = 0;
+        const onScroll = () => {
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+                frame = 0;
+                let current = '';
+                for (const heading of headings) {
+                    if (heading.getBoundingClientRect().top <= 120) current = heading.id;
+                }
+                setActiveId(current || headings[0]?.id || '');
+            });
         };
 
-        return (
-            <button
-                onClick={handleCopy}
-                className={`absolute top-3 right-3 p-2 rounded-lg transition-all ${
-                    isDarkMode
-                        ? 'bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white'
-                        : 'bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900'
-                }`}
-                title={copied ? t('common.copied') : t('common.copyCode')}
-            >
-                {copied ? (
-                    <RiCheckLine size={16} />
-                ) : (
-                    <RiFileCopyLine size={16} />
-                )}
-            </button>
-        );
-    };
-
-    const diary = loadedDiaries.find(d => d.id === id);
-
-    const calculateWordCount = (content: string) => {
-        const textOnly = content
-            .replace(/[#*`[\]()_~]/g, '')
-            .replace(/\n/g, ' ')
-            .trim();
-        const chineseChars = (textOnly.match(/[\u4e00-\u9fa5]/g) || []).length;
-        const englishWords = textOnly.split(/\s+/).filter(word => word.length > 0).length;
-        return chineseChars + englishWords;
-    };
-
-    const wordCount = diary ? calculateWordCount(diary.content) : 0;
-
-    const markdownStyles = `
-        .markdown-body h1 { font-size: 2em; font-weight: 700; margin: 1em 0 0.5em; }
-        .markdown-body h2 { font-size: 1.5em; font-weight: 600; margin: 1em 0 0.5em; }
-        .markdown-body h3 { font-size: 1.25em; font-weight: 600; margin: 1em 0 0.5em; }
-        .markdown-body h4 { font-size: 1.125em; font-weight: 600; margin: 1em 0 0.5em; }
-        .markdown-body h5 { font-size: 1em; font-weight: 600; margin: 1em 0 0.5em; }
-        .markdown-body h6 { font-size: 0.875em; font-weight: 600; margin: 1em 0 0.5em; }
-        .markdown-body p { margin: 1em 0; line-height: 1.7; }
-        .markdown-body ul { margin: 1em 0; padding-left: 1.75em; list-style-type: disc; }
-        .markdown-body ol { margin: 1em 0; padding-left: 1.75em; list-style-type: decimal; }
-        .markdown-body li { margin: 0.375em 0; line-height: 1.7; }
-        .markdown-body ul ul, .markdown-body ul ol,
-        .markdown-body ol ul, .markdown-body ol ol { margin: 0.5em 0; padding-left: 1.5em; }
-        .markdown-body ul ul { list-style-type: circle; }
-        .markdown-body ul ul ul { list-style-type: square; }
-        .markdown-body ol ol { list-style-type: lower-alpha; }
-        .markdown-body ol ol ol { list-style-type: lower-roman; }
-        .markdown-body code { padding: 0.2em 0.4em; border-radius: 4px; font-size: 0.9em; }
-        .markdown-body pre { padding: 1em; border-radius: 8px; overflow-x: auto; margin: 1em 0; }
-        .markdown-body pre code { padding: 0; background: transparent; }
-        .markdown-body blockquote { border-left: 4px solid; padding-left: 1em; margin: 1em 0; font-style: italic; }
-        .markdown-body table { width: 100%; border-collapse: collapse; margin: 1em 0; }
-        .markdown-body th, .markdown-body td { padding: 0.75em; border: 1px solid; text-align: left; }
-    `;
+        onScroll();
+        window.addEventListener('scroll', onScroll, {passive: true});
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            if (frame) cancelAnimationFrame(frame);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [diary]);
 
     if (!diary) {
         return (
-            <div className={`min-h-screen flex items-center justify-center ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
-                <SnowBackground isDarkMode={isDarkMode} />
-                <div className="relative z-10 text-center">
-                    <h1 className={`text-2xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        {t('diaryNotFound.title')}
-                    </h1>
-                    <button
-                        onClick={() => navigate('/diaries')}
-                        className={`px-6 py-2 rounded-lg ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
-                    >
-                        {t('common.backToDiaries')}
-                    </button>
-                </div>
-            </div>
+            <NotFoundBox
+                code="404 — NOT FOUND"
+                title={t('diaryNotFound.title')}
+                desc={t('diaryNotFound.desc')}
+                backLabel={t('diaryNotFound.back')}
+                onBack={() => navigate('/diaries')}
+            />
         );
     }
 
+    const wordCount = calculateWordCount(diary.content);
+    const minutes = readingTime(diary.content);
+    const index = diaries.findIndex((d) => d.id === diary.id);
+    const prevDiary = diaries[index + 1];
+    const nextDiary = diaries[index - 1];
+
     return (
-        <div className={`min-h-screen ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
-            <SnowBackground isDarkMode={isDarkMode} />
-            <style>{markdownStyles}</style>
-            <div className="relative z-10 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                >
-                    <button
-                        onClick={() => navigate('/diaries')}
-                        className={`mb-8 flex items-center gap-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-500 hover:text-gray-900'} transition-colors`}
-                    >
-                        <RiArrowLeftLine size={20} />
-                        {t('common.backToDiaries')}
-                    </button>
-                    <div className={`p-6 sm:p-8 rounded-xl border ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
-                        <div className="mb-6">
-                            <h1 className={`text-2xl sm:text-3xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+        <div className="relative">
+            <div className="px-4 py-10 sm:px-6 md:px-8">
+                <div className="mx-auto max-w-5xl">
+                    <article className="mx-auto w-full max-w-3xl">
+                        {/* 返回（按钮负边距：整体左移，抵消图标字形内边距，箭头与正文列边缘对齐） */}
+                        <motion.button
+                            initial={{opacity: 0, x: -8}}
+                            animate={{opacity: 1, x: 0}}
+                            onClick={() => navigate('/diaries')}
+                            className="link-underline -ml-0.5 inline-flex cursor-pointer items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-mute transition-colors hover:text-ink"
+                        >
+                            <RiArrowLeftLine size={14}/>
+                            {t('common.backToDiaries')}
+                        </motion.button>
+
+                        {/* 头部 */}
+                        <motion.div
+                            initial={{opacity: 0, y: 16}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{duration: 0.5, ease: EASE}}
+                            className="mt-10"
+                        >
+                            <p className="eyebrow text-mute">
+                                {diary.date}
+                                {diary.weather ? ` · ${diary.weather}` : ''}
+                                {diary.mood ? ` · ${diary.mood}` : ''} · {wordCount.toLocaleString()}{' '}
+                                {t('common.words')} · {minutes} {t('common.minRead')}
+                            </p>
+                            <h1 className="mt-5 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl md:text-5xl">
                                 {diary.title}
                             </h1>
-                            <div className="flex flex-wrap items-center gap-4 text-sm">
-                                <div className={`flex items-center gap-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                    <RiCalendarLine size={16} />
-                                    <span>{t('common.publishedOn')} {diary.date}</span>
-                                </div>
-                                {diary.weather && (
-                                    <div className={`flex items-center gap-1.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                        <RiCloudyLine size={16} />
-                                        <span>{diary.weather}</span>
-                                    </div>
-                                )}
-                                {diary.mood && (
-                                    <div className={`flex items-center gap-1.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                        <RiEmotionHappyLine size={16} />
-                                        <span>{diary.mood}</span>
-                                    </div>
-                                )}
-                                <div className={`flex items-center gap-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                                    <RiBookOpenLine size={16} />
-                                    <span>{wordCount.toLocaleString()} {t('common.words')}</span>
-                                </div>
-                            </div>
-                            <div className="mt-3 flex flex-wrap gap-2">
+                            <div className="mt-6 flex flex-wrap gap-2">
                                 {diary.tags.map((tag) => (
                                     <span
                                         key={tag}
-                                        className={`text-xs px-3 py-1 rounded-full ${
-                                            isDarkMode
-                                                ? 'bg-gray-800 text-gray-300'
-                                                : 'bg-gray-100 text-gray-600'
-                                        }`}
+                                        className="border border-line px-2.5 py-1 font-mono text-[11px] text-mute transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                                     >
-                                        {tag}
+                                        #{tag}
                                     </span>
                                 ))}
                             </div>
-                        </div>
-                        <div
-                            className={`markdown-body ${isDarkMode ? 'text-gray-100' : 'text-gray-700'}`}>
-                            <style>{`
-                                .markdown-body code { 
-                                    background: ${isDarkMode ? '#374151' : '#f3f4f6'}; 
-                                    color: ${isDarkMode ? '#e5e7eb' : '#374151'};
-                                }
-                                .markdown-body pre { 
-                                    background: ${isDarkMode ? '#1f2937' : '#f8f8f8'}; 
-                                }
-                                .markdown-body pre code {
-                                    background: transparent;
-                                    color: ${isDarkMode ? '#f3f4f6' : '#1f2937'};
-                                }
-                                .markdown-body blockquote { border-color: ${isDarkMode ? '#4b5563' : '#d1d5db'}; }
-                                .markdown-body th, .markdown-body td { border-color: ${isDarkMode ? '#4b5563' : '#d1d5db'}; }
-                            `}</style>
-                            <ReactMarkdown
-                                remarkPlugins={[remarkGfm]}
-                                rehypePlugins={[rehypeRaw, rehypeHighlight]}
-                                components={{
-                                    pre: ({ children, ...props }) => {
-                                        const codeText = extractTextFromChildren(children);
-                                        return (
-                                            <div className="relative">
-                                                <pre {...props}>
-                                                    {children}
-                                                </pre>
-                                                <CopyButton text={codeText} />
-                                            </div>
-                                        );
-                                    },
-                                    table: ({ children, ...props }) => (
-                                        <div className="overflow-x-auto my-4">
-                                            <table {...props} className="min-w-full">
-                                                {children}
-                                            </table>
-                                        </div>
-                                    )
-                                }}
-                            >
-                                {diary.content}
-                            </ReactMarkdown>
-                        </div>
-                    </div>
-                </motion.div>
+                            <div className="mt-8 h-rule"/>
+                        </motion.div>
+
+                        {/* 正文 */}
+                        <motion.div
+                            initial={{opacity: 0, y: 20}}
+                            animate={{opacity: 1, y: 0}}
+                            transition={{duration: 0.6, delay: 0.08, ease: EASE}}
+                            className="mt-2"
+                        >
+                            <MarkdownContent content={diary.content}/>
+                        </motion.div>
+
+                        {/* 上下篇 */}
+                        <nav className="mt-16 grid gap-4 sm:grid-cols-2">
+                            {prevDiary ? (
+                                <Link
+                                    prefetch="intent"
+                                    to={`/diary/${prevDiary.id}`}
+                                    className="group border border-line p-6 transition-colors duration-300 hover:border-[var(--accent)] hover:bg-soft"
+                                >
+                                    <span className="eyebrow flex items-center gap-1.5 text-mute">
+                                        <RiArrowLeftLine size={13}/>
+                                        {t('common.prev')}
+                                    </span>
+                                    <h4 className="mt-3 font-display text-lg font-medium transition-all duration-300 group-hover:italic">
+                                        {prevDiary.title}
+                                    </h4>
+                                </Link>
+                            ) : (
+                                <div/>
+                            )}
+                            {nextDiary && (
+                                <Link
+                                    prefetch="intent"
+                                    to={`/diary/${nextDiary.id}`}
+                                    className="group border border-line p-6 text-right transition-colors duration-300 hover:border-[var(--accent)] hover:bg-soft"
+                                >
+                                    <span className="eyebrow flex items-center justify-end gap-1.5 text-mute">
+                                        {t('common.next')}
+                                        <RiArrowRightLine size={13}/>
+                                    </span>
+                                    <h4 className="mt-3 font-display text-lg font-medium transition-all duration-300 group-hover:italic">
+                                        {nextDiary.title}
+                                    </h4>
+                                </Link>
+                            )}
+                        </nav>
+                    </article>
+
+                    {/* 固定可折叠目录 */}
+                    {toc.length > 0 && <TocPanel items={toc} activeId={activeId}/>}
+                </div>
             </div>
         </div>
     );

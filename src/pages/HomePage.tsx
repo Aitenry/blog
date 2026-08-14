@@ -1,28 +1,30 @@
+// pages/HomePage.tsx
 import HomeSection from '../components/HomeSection';
 import AboutSection from '../components/AboutSection';
 import SkillsSection from '../components/SkillsSection';
 import ProjectsSection from '../components/ProjectsSection';
-import SnowBackground from '../components/SnowBackground';
-import React from "react";
+import Marquee from '../components/ui/Marquee';
+import {useTranslation} from 'react-i18next';
 
 interface HomePageProps {
     isDarkMode: boolean;
     scrollToNextSection: () => void;
 }
 
-const HomePage: React.FC<HomePageProps> = ({ isDarkMode, scrollToNextSection }) => {
+const HomePage: React.FC<HomePageProps> = ({isDarkMode, scrollToNextSection}) => {
+    const {t} = useTranslation();
+    const marqueeItems = t('home.marquee', {returnObjects: true}) as string[];
+
     return (
         <>
-            <SnowBackground isDarkMode={isDarkMode} />
-            <div className="relative z-10">
-                <HomeSection
-                    isDarkMode={isDarkMode}
-                    scrollToNextSection={scrollToNextSection}
-                />
-                <AboutSection isDarkMode={isDarkMode} />
-                <SkillsSection isDarkMode={isDarkMode} />
-                <ProjectsSection isDarkMode={isDarkMode} />
+            <HomeSection scrollToNextSection={scrollToNextSection}/>
+            {/* 斜向跑马灯彩带 */}
+            <div className="relative z-10 -mx-2 rotate-[-1.2deg] sm:mx-0">
+                <Marquee items={marqueeItems}/>
             </div>
+            <AboutSection/>
+            <SkillsSection/>
+            <ProjectsSection isDarkMode={isDarkMode}/>
         </>
     );
 };

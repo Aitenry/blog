@@ -1,129 +1,93 @@
-// ProjectsSection.tsx
-import { motion, type Variants } from 'framer-motion';
-import type {SectionProps} from '../types/app.ts';
-import React from "react";
-import { useTranslation } from 'react-i18next';
+// components/ProjectsSection.tsx — 开源项目：细线网格块
+import {RiGithubFill} from '@remixicon/react';
+import {useTranslation} from 'react-i18next';
+import {projects} from '../data/projects';
+import ArrowLink from './ui/ArrowLink';
+import Reveal from './ui/Reveal';
+import SectionTitle from './ui/SectionTitle';
 
-interface Project {
-    id: number;
-    title: string;
-    description: string;
-    tech: string[];
-    image: string;
-    github: string;
+interface ProjectsSectionProps {
+    isDarkMode: boolean;
 }
 
-const ProjectsSection: React.FC<SectionProps> = ({ isDarkMode }) => {
-    const { t } = useTranslation();
-    const projects: Project[] = [
-        {
-            id: 1,
-            title: "IIMS-By-AI",
-            description: t('projects.iimsDescription'),
-            tech: ["Java", "Vue", "SpringBoot", "TypeScript", "AI"],
-            image: isDarkMode
-                ? "/iims-dark.svg"
-                : "/iims-light.svg",
-            github: "https://github.com/Aitenry/IIMS-By-AI"
-        },
-        {
-            id: 2,
-            title: "RytenBench",
-            description: t('projects.rytenDescription'),
-            tech: ["Electron", "React", "TypeScript", "AI"],
-            image: isDarkMode
-                ? "/ryten-dark.svg"
-                : "/ryten-light.svg",
-            github: "https://github.com/Aitenry/RytenBench"
-        }
-    ];
-
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const itemVariants: Variants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                type: "spring",
-                damping: 12,
-                stiffness: 100
-            }
-        }
-    };
+const ProjectsSection: React.FC<ProjectsSectionProps> = ({isDarkMode}) => {
+    const {t} = useTranslation();
 
     return (
-        <section
-            id="projects"
-            className={`min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-24 flex items-center ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`
-            }>
-            <div className="max-w-5xl w-full mx-auto">
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-12 sm:mb-16"
-                >
-                    <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        {t('projects.title')}
-                    </h2>
-                    <div className={`w-12 sm:w-16 h-0.5 mx-auto ${isDarkMode ? 'bg-gray-700' : 'bg-blue-200'} rounded-full`} />
-                </motion.div>
+        <section id="projects" className="h-rule bg-soft px-4 py-28 sm:px-6 sm:py-36 md:px-8">
+            <div className="mx-auto max-w-6xl">
+                <SectionTitle index={3} label={t('projects.eyebrow')} title={t('projects.title')}/>
 
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8"
-                >
-                    {projects.map((project) => (
-                        <motion.a
-                            key={project.id}
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            variants={itemVariants}
-                            whileHover={{ y: -5 }}
-                            className={`block ${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl overflow-hidden border transition-all duration-300 h-full shadow-sm hover:shadow-md`}
-                        >
-                            <div className="h-32 sm:h-40 overflow-hidden">
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                                />
-                            </div>
-                            <div className="p-4 sm:p-5 flex flex-col">
-                                <h3 className={`font-bold text-lg mb-1 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                                    {project.title}
-                                </h3>
-                                <p className={`text-sm mb-3 h-12 sm:h-10 overflow-hidden line-clamp-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                    {project.description}
-                                </p>
-                                <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-auto">
-                                    {project.tech.map((tech, i) => (
+                <div className="mt-14 grid gap-px border border-line bg-[var(--line)] md:grid-cols-2">
+                    {projects.map((project, index) => (
+                        <Reveal key={project.id} delay={index * 0.08} className="h-full">
+                            <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group flex h-full flex-col bg-[var(--paper)] p-6 transition-colors duration-300 hover:bg-soft sm:p-8"
+                            >
+                                {/* 封面 */}
+                                <div className="aspect-[16/8] overflow-hidden border border-line">
+                                    <img
+                                        src={isDarkMode ? project.imageDark : project.imageLight}
+                                        alt={project.title}
+                                        loading="lazy"
+                                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                                    />
+                                </div>
+
+                                {/* 标题行 */}
+                                <div className="mt-6 flex items-baseline justify-between gap-4">
+                                    <h3 className="font-display text-2xl font-semibold tracking-tight transition-colors duration-300 group-hover:text-[var(--accent)] sm:text-3xl">
+                                        {project.title}
+                                    </h3>
+                                    <div className="flex shrink-0 items-center gap-2">
                                         <span
-                                            key={i}
-                                            className={`px-2 py-0.5 rounded text-xs font-medium whitespace-nowrap ${isDarkMode ? 'bg-gray-700 text-white' : 'bg-blue-50 text-blue-700'}`}
+                                            className={`border px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
+                                                project.status === 'active'
+                                                    ? 'border-[var(--accent)] text-[var(--accent)]'
+                                                    : 'border-line text-mute'
+                                            }`}
+                                        >
+                                            {project.status === 'active'
+                                                ? t('projects.statusActive')
+                                                : t('projects.statusAcquired')}
+                                        </span>
+                                        <span className="font-mono text-xs text-mute">
+                                            NO.{String(project.id).padStart(2, '0')}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <p className="mt-3 leading-relaxed text-mute">
+                                    {t(project.descriptionKey)}
+                                </p>
+
+                                <div className="mt-5 flex flex-wrap gap-2">
+                                    {project.tech.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className="border border-line px-2.5 py-1 font-mono text-[11px] text-mute"
                                         >
                                             {tech}
                                         </span>
                                     ))}
                                 </div>
-                            </div>
-                        </motion.a>
+
+                                <div className="mt-auto flex items-center justify-between pt-8">
+                                    <ArrowLink href={project.github} external>
+                                        {t('projects.viewProject')}
+                                    </ArrowLink>
+                                    <RiGithubFill
+                                        size={19}
+                                        className="text-mute transition-colors duration-300 group-hover:text-[var(--accent)]"
+                                    />
+                                </div>
+                            </a>
+                        </Reveal>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );

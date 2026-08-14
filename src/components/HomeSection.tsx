@@ -1,94 +1,143 @@
-// HomeSection.tsx
-import { motion } from 'framer-motion';
-import type {SectionProps} from '../types/app.ts';
-import React from "react";
-import { useTranslation } from 'react-i18next';
+// components/HomeSection.tsx — Hero：编辑风格大标题 + 状态行 + 数据表
+import {motion} from 'framer-motion';
+import {RiArrowDownLine, RiArrowRightLine} from '@remixicon/react';
+import {useNavigate} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
+import CountUp from './ui/CountUp';
+import Reveal, {EASE} from './ui/Reveal';
+import {articles} from '../data/articles';
+import {diaries} from '../data/diaries';
+import {projects} from '../data/projects';
+import {skills} from '../data/skills';
 
-interface HomeSectionProps extends SectionProps {
+interface HomeSectionProps {
     scrollToNextSection: () => void;
 }
 
-const HomeSection: React.FC<HomeSectionProps> = ({
-                                                     isDarkMode,
-                                                     scrollToNextSection
-                                                 }) => {
-    const { t } = useTranslation();
-    
+const HomeSection: React.FC<HomeSectionProps> = ({scrollToNextSection}) => {
+    const {t} = useTranslation();
+    const navigate = useNavigate();
+
+    const stats = [
+        {value: articles.length, label: t('home.statsArticles')},
+        {value: diaries.length, label: t('home.statsDiaries')},
+        {value: projects.length, label: t('home.statsProjects')},
+        {value: skills.length, label: t('home.statsSkills')}
+    ];
+
     return (
         <section
             id="home"
-            className="min-h-[calc(100vh-70px)] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 relative"
+            className="relative flex min-h-[calc(100svh-4rem)] flex-col justify-center px-4 py-20 sm:px-6 md:px-8"
         >
-            <div className="max-w-4xl w-full mx-auto text-center flex-grow flex flex-col justify-center">
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7 }}
-                    className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 ${
-                        isDarkMode ? 'text-white' : 'text-gray-900'
-                    } leading-tight`}
-                >
-                    {t('home.title')}
-                </motion.h1>
+            <div className="mx-auto w-full max-w-6xl">
+                {/* 大标题 */}
+                <h1 className="mt-8 font-display text-[13vw] font-semibold leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl">
+                    <span className="block overflow-hidden pb-1">
+                        <motion.span
+                            initial={{y: '110%'}}
+                            animate={{y: 0}}
+                            transition={{duration: 0.8, ease: EASE}}
+                            className="block"
+                        >
+                            {t('home.headline1')}
+                        </motion.span>
+                    </span>
+                    <span className="block overflow-hidden pb-2">
+                        <motion.span
+                            initial={{y: '110%'}}
+                            animate={{y: 0}}
+                            transition={{duration: 0.8, delay: 0.12, ease: EASE}}
+                            className="block italic"
+                        >
+                            {t('home.headline2')}
+                            <span className="text-accent not-italic">。</span>
+                        </motion.span>
+                    </span>
+                </h1>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.1 }}
-                    className={`text-lg sm:text-xl md:text-2xl ${
-                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    } max-w-2xl lg:max-w-3xl mx-auto mb-8`}
-                >
-                    {t('home.subtitle')}
-                </motion.p>
+                {/* 角色行 */}
+                <Reveal delay={0.3}>
+                    <p className="mt-8 font-mono text-sm text-mute sm:text-base">{t('home.roles')}</p>
+                </Reveal>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.2 }}
-                    className="hidden md:block"
-                >
-                    <p className={`text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                        {t('home.description')}
+                {/* 现在状态 */}
+                <Reveal delay={0.38}>
+                    <p className="mt-3 font-mono text-sm sm:text-base">
+                        <span className="blink mr-2 inline-block h-3 w-2 translate-y-0.5 bg-[var(--accent)]"/>
+                        {t('home.nowPrefix')}{' '}
+                        <a
+                            href="https://github.com/Aitenry/RytenBench"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-underline text-accent transition-opacity duration-200 hover:opacity-70"
+                        >
+                            {t('home.nowTarget')}
+                        </a>
                     </p>
-                </motion.div>
+                </Reveal>
+
+                {/* CTA */}
+                <Reveal delay={0.46}>
+                    <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                        <button
+                            onClick={() => navigate('/articles')}
+                            className="group inline-flex cursor-pointer items-center justify-center gap-2 border border-[var(--ink)] bg-ink px-7 py-3.5 text-sm font-semibold text-paper transition-colors duration-300 hover:border-[var(--accent)] hover:bg-accent hover:text-[var(--accent-ink)]"
+                        >
+                            {t('home.ctaArticles')}
+                            <RiArrowRightLine
+                                size={16}
+                                className="transition-transform duration-300 group-hover:translate-x-1"
+                            />
+                        </button>
+                        <button
+                            onClick={() =>
+                                document.getElementById('projects')?.scrollIntoView({behavior: 'smooth'})
+                            }
+                            className="group inline-flex cursor-pointer items-center justify-center gap-2 border border-line px-7 py-3.5 text-sm font-semibold text-ink transition-colors duration-300 hover:border-[var(--ink)]"
+                        >
+                            {t('home.ctaProjects')}
+                            <RiArrowDownLine
+                                size={16}
+                                className="transition-transform duration-300 group-hover:translate-y-0.5"
+                            />
+                        </button>
+                    </div>
+                </Reveal>
+
+                {/* 数据表 */}
+                <Reveal delay={0.55}>
+                    <div className="mt-20 grid grid-cols-2 border-t border-line sm:grid-cols-4">
+                        {stats.map((stat, index) => (
+                            <div
+                                key={stat.label}
+                                className={`px-4 py-6 ${index > 0 ? 'border-l border-line' : ''} ${
+                                    index >= 2 ? 'border-t border-line sm:border-t-0' : ''
+                                }`}
+                            >
+                                <CountUp value={stat.value} className="text-3xl font-medium sm:text-4xl"/>
+                                <p className="eyebrow mt-2 text-mute">{stat.label}</p>
+                            </div>
+                        ))}
+                    </div>
+                </Reveal>
             </div>
 
-            {/* Scroll Indicator - Responsive positioning */}
-            <motion.div
+            {/* 滚动提示（仅竖线动画） */}
+            <motion.button
                 onClick={scrollToNextSection}
-                className="cursor-pointer absolute bottom-6 sm:bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-20"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.5, duration: 0.5 }}
-                whileTap={{ scale: 0.95 }}
-                whileHover={{ y: 5 }}
+                aria-label={t('home.scroll')}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{delay: 1.2, duration: 0.6}}
+                className="absolute bottom-8 left-1/2 flex -translate-x-1/2 cursor-pointer flex-col items-center"
             >
-                <motion.svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className={`w-5 sm:w-6 h-8 sm:h-10 ${
-                        isDarkMode ? 'text-white' : 'text-gray-800'
-                    }`}
-                    animate={{
-                        y: [0, 5, 0],
-                    }}
-                    transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        repeatDelay: 0.5,
-                    }}
-                >
-                    <path
-                        d="M5 9L12 16L19 9"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </motion.svg>
-            </motion.div>
+                <motion.span
+                    animate={{y: [0, 10, 0], opacity: [1, 0.3, 1]}}
+                    transition={{duration: 1.8, repeat: Infinity, ease: 'easeInOut'}}
+                    className="block h-9 w-px bg-[var(--ink)]"
+                />
+            </motion.button>
         </section>
     );
 };
