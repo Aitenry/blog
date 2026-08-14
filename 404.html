@@ -1,15 +1,121 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <title>Aitenry · 写代码，也写生活</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 · Aitenry</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #f3f0e9;
+    --ink: #1b1915;
+    --mute: #6e6759;
+    --line: rgba(27, 25, 21, 0.18);
+    --accent: #ff4d00;
+    --accent-ink: #14120e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Space Grotesk", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    padding: 48px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 8px 8px 0 0 var(--ink);
+  }
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: "Fraunces", "Songti SC", "SimSun", Georgia, serif;
+    font-weight: 600;
+    font-size: 40px;
+    letter-spacing: -0.01em;
+    margin-top: 16px;
+  }
+  .desc {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--mute);
+  }
+  .actions {
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+  .btn-solid { background: var(--ink); color: var(--paper); border: 1px solid var(--ink); }
+  .btn-solid:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--ink); }
+  .footer {
+    margin-top: 28px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+</style>
+<script>
+  // GitHub Pages SPA 回退：合法应用路径交给应用处理（sessionStorage 恢复 URL），
+  // 其余无效路径直接展示本页 —— 独立设计的 404 页面。
+  (function () {
+    var path = location.pathname.replace(/\/+$/, '') || '/';
+    var valid =
+      path === '/' ||
+      path === '/home' ||
+      path === '/articles' ||
+      path === '/diaries' ||
+      /^\/article\/[^/]+$/.test(path) ||
+      /^\/diary\/[^/]+$/.test(path);
+    if (valid) {
+      sessionStorage.setItem('redirect', location.pathname + location.search);
+      location.replace('/');
+    }
+  })();
+</script>
 </head>
 <body>
-  <script>
-    // GitHub Pages SPA 回退：把目标路径存入 sessionStorage 后跳回根路径，
-    // 由 main.tsx 在应用启动时恢复 URL 并交给 BrowserRouter 路由。
-    sessionStorage.setItem('redirect', location.pathname + location.search)
-    location.replace('/')
-  </script>
+  <main class="card">
+    <p class="eyebrow">404 — Page Not Found</p>
+    <h1>页面不存在</h1>
+    <p class="desc">你访问的地址不存在或已被移除。检查一下网址，或者回首页继续逛逛。</p>
+    <div class="actions">
+      <a class="btn btn-solid" href="/">← 返回首页</a>
+      <a class="btn btn-ghost" href="/articles">查看文章</a>
+    </div>
+    <p class="footer">Aitenry · 写代码，也写生活</p>
+  </main>
 </body>
 </html>
