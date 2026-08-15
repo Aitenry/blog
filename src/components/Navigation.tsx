@@ -328,7 +328,15 @@ const Navigation: React.FC<NavProps> = ({activeSection, isDarkMode, onToggleThem
                         transition={{duration: 0.25, ease: 'easeOut'}}
                         className="fixed inset-0 z-50 bg-[var(--paper)] md:hidden"
                     >
-                        <div className="flex h-full flex-col px-6 pb-10 pt-24">
+                        {/* 关闭按钮（与导航栏汉堡按钮同位，菜单盖住导航后仍可关闭） */}
+                        <button
+                            onClick={() => setIsMobileOpen(false)}
+                            aria-label="close menu"
+                            className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center border border-line text-mute transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                        >
+                            <RiCloseLine size={17}/>
+                        </button>
+                        <div className="flex h-full flex-col overflow-y-auto px-6 pb-10 pt-24">
                             {sections.map((section, index) => (
                                 <motion.div
                                     key={section}
