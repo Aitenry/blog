@@ -18,7 +18,7 @@ import type {NavProps} from '../types/app';
 import {articles} from '../data/articles';
 import {diaries} from '../data/diaries';
 
-const sections = ['home', 'diaries', 'articles'] as const;
+const sections = ['home', 'diaries', 'articles', 'photos', 'reading', 'tools'] as const;
 
 const Navigation: React.FC<NavProps> = ({activeSection, isDarkMode, onToggleTheme, handleNavClick}) => {
     const {t} = useTranslation();
@@ -259,7 +259,7 @@ const Navigation: React.FC<NavProps> = ({activeSection, isDarkMode, onToggleThem
                     </Link>
 
                     {/* 桌面导航 */}
-                    <div className="hidden items-center gap-8 md:flex">
+                    <div className="hidden items-center gap-5 md:flex lg:gap-7">
                         {sections.map((section, index) => {
                             const active = activeSection === section;
                             return (
@@ -294,7 +294,7 @@ const Navigation: React.FC<NavProps> = ({activeSection, isDarkMode, onToggleThem
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="GitHub"
-                            className={`${iconBtn} hidden sm:flex`}
+                            className={`${iconBtn} hidden lg:flex`}
                         >
                             <RiGithubFill size={16}/>
                         </a>
@@ -303,7 +303,7 @@ const Navigation: React.FC<NavProps> = ({activeSection, isDarkMode, onToggleThem
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Gitee"
-                            className={`${iconBtn} hidden sm:flex`}
+                            className={`${iconBtn} hidden lg:flex`}
                         >
                             <RiGiteeFill size={16}/>
                         </a>

@@ -3,7 +3,7 @@ import {RiGiteeFill, RiGithubFill} from '@remixicon/react';
 import {Link} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 
-const sections = ['home', 'diaries', 'articles'] as const;
+const sections = ['home', 'diaries', 'articles', 'photos', 'reading', 'tools'] as const;
 
 const Footer: React.FC = () => {
     const {t} = useTranslation();
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
                                 <RiGiteeFill size={19}/>
                             </a>
                         </div>
-                        <nav className="flex gap-6">
+                        <nav className="flex max-w-xs flex-wrap gap-x-6 gap-y-2 md:max-w-none md:justify-end">
                             {sections.map((section) => (
                                 <Link
                                     key={section}

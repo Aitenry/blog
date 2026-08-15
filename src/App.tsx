@@ -12,6 +12,9 @@ import Particles from './components/ui/Particles';
 import HomePage from './pages/HomePage';
 import ArticlesPage from './pages/ArticlesPage';
 import DiariesPage from './pages/DiariesPage';
+import PhotosPage from './pages/PhotosPage';
+import ReadingPage from './pages/ReadingPage';
+import ToolsPage from './pages/ToolsPage';
 import NotFoundPage from './pages/NotFoundPage';
 import type {NavProps} from './types/app.ts';
 
@@ -58,14 +61,23 @@ const AppContent = () => {
         activeSection = 'diaries';
     } else if (location.pathname === '/articles' || location.pathname.startsWith('/article/')) {
         activeSection = 'articles';
+    } else if (location.pathname === '/photos') {
+        activeSection = 'photos';
+    } else if (location.pathname === '/reading') {
+        activeSection = 'reading';
+    } else if (location.pathname === '/tools') {
+        activeSection = 'tools';
     }
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    // 主题色同步到浏览器地址栏
+    // 主题同步到 <html>（data-theme 必须挂在 documentElement 上：否则 createPortal
+    // 到 body 的弹层（如相册灯箱）会脱离 data-theme 祖先链，CSS 变量回落到浅色默认值）
+    // 同时同步浏览器地址栏 theme-color
     useEffect(() => {
+        document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
         const meta = document.querySelector('meta[name="theme-color"]');
         meta?.setAttribute('content', isDarkMode ? '#14120E' : '#F3F0E9');
     }, [isDarkMode]);
@@ -91,12 +103,17 @@ const AppContent = () => {
             navigate('/diaries');
         } else if (sectionId === 'articles') {
             navigate('/articles');
+        } else if (sectionId === 'photos') {
+            navigate('/photos');
+        } else if (sectionId === 'reading') {
+            navigate('/reading');
+        } else if (sectionId === 'tools') {
+            navigate('/tools');
         }
     };
 
     return (
         <div
-            data-theme={isDarkMode ? 'dark' : 'light'}
             className="font-sans relative min-h-screen overflow-x-clip bg-[var(--paper)] text-ink transition-colors duration-300"
         >
             <NoiseOverlay/>
@@ -150,6 +167,9 @@ const AppContent = () => {
                     <Route path="/article/:id" element={<ArticlePage/>}/>
                     <Route path="/diaries" element={<DiariesPage/>}/>
                     <Route path="/diary/:id" element={<DiaryPage/>}/>
+                    <Route path="/photos" element={<PhotosPage/>}/>
+                    <Route path="/reading" element={<ReadingPage/>}/>
+                    <Route path="/tools" element={<ToolsPage/>}/>
                 </Route>
 
                 {/* 独立 404：无顶部栏、无页脚 */}

@@ -4,6 +4,9 @@ export default {
         home: 'Home',
         diaries: 'Diaries',
         articles: 'Articles',
+        photos: 'Photos',
+        reading: 'Reading',
+        tools: 'Toolbox',
         search: 'Search',
         typeToSearch: 'Search articles & diaries…',
         startTypingToSearch: 'Start typing to search',
@@ -93,6 +96,39 @@ export default {
         eyebrow: 'Diaries',
         title: 'Diaries',
         total: 'TOTAL'
+    },
+    photos: {
+        eyebrow: 'Gallery',
+        title: 'Photos',
+        total: 'PHOTOS',
+        all: 'All',
+        travel: 'Travel',
+        pet: 'Pets',
+        lightbox: 'Photo viewer',
+        close: 'Close',
+        prev: 'Previous',
+        next: 'Next',
+        kbdHint: '← → navigate · ESC close',
+        featured: 'Featured',
+        autoplayHint: 'Hover to pause · Click to view',
+        viewHint: 'View Large',
+        statPhotos: 'PHOTOS',
+        statSeries: 'SERIES',
+        statShotOn: 'SHOT ON'
+    },
+    reading: {
+        eyebrow: 'Reading',
+        title: 'Reading List',
+        total: 'BOOKS',
+        statusReading: 'Reading',
+        statusRead: 'Read',
+        statusWant: 'To Read'
+    },
+    tools: {
+        eyebrow: 'Toolbox',
+        title: 'Toolbox',
+        total: 'TOOLS',
+        visit: 'Visit'
     },
     footer: {
         eyebrow: 'TO BE CONTINUED',

@@ -7,6 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Aitenry 的个人站 · 琉璃博客 — 写代码，也写生活。技术文章、开发日记与开源项目。" />
     <meta name="theme-color" content="#14120E" />
+    <script>
+      // 首屏前应用主题：读取 localStorage，回退到系统偏好。
+      // 挂在 <html> 上（而非应用根节点），保证 portal 弹层（相册灯箱等）也在主题作用域内。
+      (function () {
+        try {
+          var stored = localStorage.getItem('blog-theme');
+          var theme = stored === 'dark' || stored === 'light'
+            ? stored
+            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) { /* ignore */ }
+      })();
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Aitenry · 写代码，也写生活" />
     <meta property="og:description" content="Aitenry 的个人站 — 写代码，也写生活。技术文章、开发日记与开源项目。" />

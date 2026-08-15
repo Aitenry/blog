@@ -4,6 +4,9 @@ export default {
         home: '首页',
         diaries: '日记',
         articles: '文章',
+        photos: '相册',
+        reading: '书单',
+        tools: '工具箱',
         search: '搜索',
         typeToSearch: '输入关键词，搜索文章与日记…',
         startTypingToSearch: '开始输入以搜索',
@@ -93,6 +96,39 @@ export default {
         eyebrow: '日记',
         title: '日记',
         total: '篇'
+    },
+    photos: {
+        eyebrow: '相册',
+        title: '照片',
+        total: '张',
+        all: '全部',
+        travel: '旅行',
+        pet: '宠物',
+        lightbox: '照片查看器',
+        close: '关闭',
+        prev: '上一张',
+        next: '下一张',
+        kbdHint: '← → 切换 · ESC 关闭',
+        featured: '精选',
+        autoplayHint: '悬停暂停 · 点击查看',
+        viewHint: '查看大图',
+        statPhotos: '张照片',
+        statSeries: '个系列',
+        statShotOn: '拍摄于'
+    },
+    reading: {
+        eyebrow: '书单',
+        title: '在读的书',
+        total: '本',
+        statusReading: '在读',
+        statusRead: '已读',
+        statusWant: '想读'
+    },
+    tools: {
+        eyebrow: '工具箱',
+        title: '常用工具',
+        total: '件',
+        visit: '访问'
     },
     footer: {
         eyebrow: '未完待续',
