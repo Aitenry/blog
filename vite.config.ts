@@ -11,6 +11,9 @@ export default defineConfig({
         chunkSizeWarningLimit: 600,
         rollupOptions: {
             output: {
+                // 主入口固定命名为 app-[hash].js：与旧版 index-*.js 完全换名，
+                // 避免 CDN/缓存按旧文件名命中旧资源（线上不更新的常见原因）
+                entryFileNames: 'assets/app-[hash].js',
                 manualChunks: {
                     react: ['react', 'react-dom', 'react-router-dom'],
                     motion: ['framer-motion'],
