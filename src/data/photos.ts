@@ -25,7 +25,9 @@ export const photos: Photo[] = [
     {no: 9, category: 'travel', src: '/travel/thumbs/20260815082353_9_3.jpg', date: '2026.08.15'},
     {no: 10, category: 'travel', src: '/travel/thumbs/20260815082354_10_3.jpg', date: '2026.08.15'},
     {no: 11, category: 'travel', src: '/travel/thumbs/20260815082355_11_3.jpg', date: '2026.08.15'},
-    {no: 12, category: 'travel', src: '/travel/thumbs/20260815082356_12_3.jpg', date: '2026.08.15'}
+    {no: 12, category: 'travel', src: '/travel/thumbs/20260815082356_12_3.jpg', date: '2026.08.15'},
+    {no: 13, category: 'pet', src: '/pet/thumbs/20260817174248_13_3.jpg', date: '2026.08.17'},
+    {no: 14, category: 'pet', src: '/pet/thumbs/20260817174248_14_3.jpg', date: '2026.08.17'}
 ];
 
 export default photos;
